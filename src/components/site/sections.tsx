@@ -60,7 +60,7 @@ export function ProblemStrip() {
 }
 
 /** Starter Kit card with one-time / subscribe toggle. */
-export function StarterKitOffer({ className }: { className?: string }) {
+export function StarterKitOffer({ className, showDetailsLink = true }: { className?: string; showDetailsLink?: boolean }) {
   const [mode, setMode] = useState<"once" | "subscribe">("once");
   const { add } = useCart();
   const kit = PRODUCTS["starter-kit"];
@@ -104,7 +104,7 @@ export function StarterKitOffer({ className }: { className?: string }) {
         <Button size="lg" className="mt-6" onClick={buy}>
           {mode === "once" ? `Get the Starter Kit – ${formatPrice(kit.priceCents)}` : "Start my subscription"}
         </Button>
-        <Link to="/shop/essential-starter-kit" className="mt-4 text-center text-sm text-gold-ink underline-offset-4 hover:underline">See all details</Link>
+        {showDetailsLink && <Link to="/shop/essential-starter-kit" className="mt-4 text-center text-sm text-gold-ink underline-offset-4 hover:underline">See all details</Link>}
       </div>
     </div>
   );
