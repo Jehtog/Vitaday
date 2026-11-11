@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShopEssentialStarterKitRouteImport } from './routes/shop.essential-starter-kit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShopEssentialStarterKitRoute = ShopEssentialStarterKitRouteImport.update({
+  id: '/shop/essential-starter-kit',
+  path: '/shop/essential-starter-kit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/shop/essential-starter-kit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/shop/essential-starter-kit'
+  id: '__root__' | '/' | '/shop/essential-starter-kit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShopEssentialStarterKitRoute: typeof ShopEssentialStarterKitRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shop/essential-starter-kit': {
+      id: '/shop/essential-starter-kit'
+      path: '/shop/essential-starter-kit'
+      fullPath: '/shop/essential-starter-kit'
+      preLoaderRoute: typeof ShopEssentialStarterKitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShopEssentialStarterKitRoute: ShopEssentialStarterKitRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
