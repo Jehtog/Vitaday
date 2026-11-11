@@ -10,16 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as IngredientsRouteImport } from './routes/ingredients'
+import { Route as OrderConfirmationRouteImport } from './routes/order-confirmation'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
 import { Route as ShopEssentialStarterKitRouteImport } from './routes/shop.essential-starter-kit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollectionsRoute = CollectionsRouteImport.update({
@@ -42,6 +49,11 @@ const IngredientsRoute = IngredientsRouteImport.update({
   path: '/ingredients',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrderConfirmationRoute = OrderConfirmationRouteImport.update({
+  id: '/order-confirmation',
+  path: '/order-confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopIndexRoute = ShopIndexRouteImport.update({
   id: '/shop/',
   path: '/shop/',
@@ -55,29 +67,35 @@ const ShopEssentialStarterKitRoute = ShopEssentialStarterKitRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/ingredients': typeof IngredientsRoute
+  '/order-confirmation': typeof OrderConfirmationRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/ingredients': typeof IngredientsRoute
+  '/order-confirmation': typeof OrderConfirmationRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop': typeof ShopIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
   '/ingredients': typeof IngredientsRoute
+  '/order-confirmation': typeof OrderConfirmationRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop/': typeof ShopIndexRoute
 }
@@ -85,38 +103,46 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/checkout'
     | '/collections'
     | '/faq'
     | '/how-it-works'
     | '/ingredients'
+    | '/order-confirmation'
     | '/shop/essential-starter-kit'
     | '/shop/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/checkout'
     | '/collections'
     | '/faq'
     | '/how-it-works'
     | '/ingredients'
+    | '/order-confirmation'
     | '/shop/essential-starter-kit'
     | '/shop'
   id:
     | '__root__'
     | '/'
+    | '/checkout'
     | '/collections'
     | '/faq'
     | '/how-it-works'
     | '/ingredients'
+    | '/order-confirmation'
     | '/shop/essential-starter-kit'
     | '/shop/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheckoutRoute: typeof CheckoutRoute
   CollectionsRoute: typeof CollectionsRoute
   FaqRoute: typeof FaqRoute
   HowItWorksRoute: typeof HowItWorksRoute
   IngredientsRoute: typeof IngredientsRoute
+  OrderConfirmationRoute: typeof OrderConfirmationRoute
   ShopEssentialStarterKitRoute: typeof ShopEssentialStarterKitRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
@@ -128,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collections': {
@@ -158,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IngredientsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/order-confirmation': {
+      id: '/order-confirmation'
+      path: '/order-confirmation'
+      fullPath: '/order-confirmation'
+      preLoaderRoute: typeof OrderConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop/': {
       id: '/shop/'
       path: '/shop'
@@ -177,10 +217,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheckoutRoute: CheckoutRoute,
   CollectionsRoute: CollectionsRoute,
   FaqRoute: FaqRoute,
   HowItWorksRoute: HowItWorksRoute,
   IngredientsRoute: IngredientsRoute,
+  OrderConfirmationRoute: OrderConfirmationRoute,
   ShopEssentialStarterKitRoute: ShopEssentialStarterKitRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
