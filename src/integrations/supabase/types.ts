@@ -14,13 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      collection_votes: {
+        Row: {
+          collection: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          collection: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          collection?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      newsletter_signups: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          source?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          source?: string
+        }
+        Relationships: []
+      }
+      waitlist_signups: {
+        Row: {
+          collection: string
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          collection: string
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          collection?: string
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_collection_vote_counts: {
+        Args: never
+        Returns: {
+          collection: string
+          votes: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
