@@ -57,9 +57,9 @@ export const FAQ_GROUPS: FaqGroup[] = [
   },
 ];
 
-export const FAQ_PREVIEW: FaqItem[] = [
-  FAQ_GROUPS[0].items[0],
-  FAQ_GROUPS[0].items[1],
-  FAQ_GROUPS[1].items[0],
-  FAQ_GROUPS[3].items[1],
-];
+const pick = (g: number, i: number): FaqItem[] => {
+  const item = FAQ_GROUPS[g]?.items[i];
+  return item ? [item] : [];
+};
+
+export const FAQ_PREVIEW: FaqItem[] = [...pick(0, 0), ...pick(0, 1), ...pick(1, 0), ...pick(3, 1)];
