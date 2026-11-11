@@ -6,12 +6,22 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CartProvider } from "@/lib/cart";
+import { SiteHeader, Wordmark } from "@/components/site/SiteHeader";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { CartDrawer } from "@/components/site/CartDrawer";
+import { CookieBanner } from "@/components/site/CookieBanner";
+import { Toaster } from "@/components/ui/sonner";
+
+// Ad landing pages show no main navigation.
+const LANDING_PATHS = ["/students", "/professionals"];
 
 function NotFoundComponent() {
   return (
@@ -81,14 +91,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "VITADAY — Your daily vitamins, made simple" },
+      { name: "description", content: "A reusable glass bottle with a 7-day vitamin dispenser built into the cap." },
+      { name: "author", content: "VITADAY" },
+      { property: "og:title", content: "VITADAY — Your daily vitamins, made simple" },
+      { property: "og:description", content: "A reusable glass bottle with a 7-day vitamin dispenser built into the cap." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -96,6 +105,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -120,11 +135,27 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isLanding = LANDING_PATHS.includes(pathname);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CartProvider>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-card focus:px-4 focus:py-2">Skip to content</a>
+        {isLanding ? (
+          <header className="container-page flex h-16 items-center justify-center md:h-20"><Wordmark /></header>
+        ) : (
+          <SiteHeader />
+        )}
+        <main id="main">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </main>
+        {!isLanding && <SiteFooter />}
+        <CartDrawer />
+        <CookieBanner />
+        <Toaster position="top-center" />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
