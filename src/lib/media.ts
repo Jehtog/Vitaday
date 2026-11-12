@@ -17,7 +17,6 @@ import boxActive from "@/assets/product/box_active.jpg.asset.json";
 import boxFocus from "@/assets/product/box_focus.jpg.asset.json";
 import boxCycle from "@/assets/product/box_cycle.jpg.asset.json";
 import boxJunior from "@/assets/product/box_junior.jpg.asset.json";
-import howItWorksTest from "@/assets/video/how-it-works.mp4";
 import lifestyleDesk from "@/assets/lifestyle-desk.jpg";
 import bottleInHand from "@/assets/bottle-in-hand.jpg";
 import type { CollectionId } from "./catalog";
@@ -39,7 +38,7 @@ export const media = {
 
 export const videos: { howItWorks: string | null; product: string | null; poster: string } = {
   // Home page + How it works page
-  howItWorks: howItWorksTest,
+  howItWorks: null,
   // Product page
   product: null,
   poster: media.bottleHero.src,
