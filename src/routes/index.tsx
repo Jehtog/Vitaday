@@ -5,7 +5,7 @@ import { WeekdayRing } from "@/components/site/WeekdayRing";
 import { ImageSlot, SectionHeading, VideoSlot } from "@/components/site/ui-bits";
 import { CollectionsGrid, FaqList, HowItWorksSteps, ProblemStrip, ReviewsEmpty, StarterKitOffer } from "@/components/site/sections";
 import { NewsletterForm } from "@/components/site/NewsletterForm";
-import { media } from "@/lib/media";
+import { media, videos } from "@/lib/media";
 import { FAQ_PREVIEW } from "@/lib/faq";
 import { PRODUCTS, formatPrice } from "@/lib/catalog";
 
@@ -57,7 +57,7 @@ function Home() {
           <SectionHeading eyebrow="How it works" title="Three steps. Then just drink." text="Your whole week lives in the cap. Every morning, turn it to today." />
           <div className="mt-14"><HowItWorksSteps /></div>
           <div className="mt-10 grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
-            <VideoSlot />
+            <VideoSlot src={videos.howItWorks} poster={videos.poster} />
             <div>
               <p className="font-display text-3xl">Watch a whole routine in 15 seconds.</p>
               <Link to="/how-it-works" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm text-gold-ink hover:underline underline-offset-4">
