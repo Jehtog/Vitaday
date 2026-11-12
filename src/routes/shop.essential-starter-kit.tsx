@@ -58,7 +58,7 @@ function ProductPage() {
       <div className="container-page grid gap-10 py-8 md:grid-cols-2 md:py-14">
         {/* Gallery */}
         <div className="md:sticky md:top-24 md:self-start">
-          <ImageSlot slot={current.slot} src={current.src} alt={current.alt} eager className="aspect-[4/5] shadow-soft" />
+          <ImageSlot slot={current.slot} src={current.src} alt={current.alt} eager className="aspect-[4/5] shadow-soft" imgClassName="object-[center_18%]" />
           <div className="mt-3 grid grid-cols-6 gap-2">
             {GALLERY.map((g, i) => (
               <button key={g.slot} onClick={() => setActive(i)} aria-label={`Show image: ${g.alt}`}

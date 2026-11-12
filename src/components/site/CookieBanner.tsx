@@ -43,8 +43,8 @@ export function CookieBanner() {
 
   return (
     <div role="dialog" aria-label="Cookie settings" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-xl rounded-2xl border border-border bg-card p-5 shadow-lift md:inset-x-auto md:right-6 md:bottom-6">
-      <p className="font-display text-2xl">A quick note on cookies</p>
-      <p className="mt-2 text-sm text-muted-foreground">
+      <p className="font-display text-xl md:text-2xl">A quick note on cookies</p>
+      <p className="mt-1 text-xs text-muted-foreground md:mt-2 md:text-sm">
         We use essential cookies to run the shop. With your permission we'd also use analytics to improve it. Read our{" "}
         <Link to="/privacy" className="text-gold-ink underline underline-offset-4">Privacy policy</Link>.
       </p>

@@ -32,7 +32,7 @@ function Confirmation() {
           <RingProgress steps={["Cart", "Details", "Payment", "Done"]} current={3} />
           <h1 className="mt-8 text-5xl md:text-6xl">Your first week starts now.</h1>
           <p className="mt-4 text-lg text-muted-foreground">
-            Thank you{order ? ` — order ${order.number} is confirmed` : ""}. {order?.email ? `We'll send updates to ${order.email}.` : ""}
+            Thank you{order ? ` — order ${order.number} is confirmed` : ""}.
           </p>
           {order?.subscription && <p className="mt-2 text-muted-foreground">You can pause, skip or cancel your subscription anytime in your account.</p>}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

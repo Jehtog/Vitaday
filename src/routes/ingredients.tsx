@@ -32,7 +32,7 @@ function Ingredients() {
 
       <section className="section-y">
         <div className="container-page grid gap-10 md:grid-cols-[1.4fr_1fr]">
-          <div className="rounded-3xl bg-card p-6 shadow-soft md:p-10">
+          <div className="min-w-0 rounded-3xl bg-card p-6 shadow-soft md:p-10">
             <h2 className="text-3xl">Nutrition facts</h2>
             <div className="mt-6"><NutritionTable /></div>
           </div>
