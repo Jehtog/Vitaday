@@ -30,7 +30,7 @@ function Home() {
       {/* HERO */}
       <section className="daylight overflow-hidden">
         <div className="container-page grid items-center gap-10 pb-16 pt-10 md:grid-cols-[1.05fr_1fr] md:pb-24 md:pt-16">
-          <div className="reveal order-2 md:order-1">
+          <div className="reveal">
             <p className="eyebrow">7-day vitamin water bottle</p>
             <h1 className="mt-4 text-5xl leading-[1.02] text-foreground sm:text-6xl lg:text-7xl">
               Your daily vitamins, <em className="text-gold-ink">made simple.</em>
@@ -42,7 +42,7 @@ function Home() {
             </div>
             <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">No app · No battery · No electronics</p>
           </div>
-          <div className="relative order-1 mx-auto w-full max-w-md md:order-2">
+          <div className="relative mx-auto w-full max-w-[20rem] md:max-w-md">
             <ImageSlot slot="hero-bottle" eager src={media.bottleHero.src} alt={media.bottleHero.alt} className="aspect-[460/1024] max-h-[640px] w-[62%] shadow-lift md:w-[64%]" />
             <WeekdayRing className="absolute -right-2 bottom-10 w-[58%] md:-right-6 md:bottom-16" />
           </div>
