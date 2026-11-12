@@ -7,7 +7,7 @@ import { ImageSlot, VideoSlot } from "@/components/site/ui-bits";
 import { HowItWorksSteps } from "@/components/site/sections";
 import { FLAVORS, PRODUCTS, PURCHASE_OPTIONS, formatPrice, type ProductId } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
-import { media } from "@/lib/media";
+import { media, videos } from "@/lib/media";
 import { deliveryWindow, fmtDay } from "@/lib/delivery";
 import { MANDATORY_NOTES } from "@/lib/ingredients";
 import { NutritionTable } from "@/components/site/NutritionTable";
@@ -171,7 +171,7 @@ function ProductPage() {
       </div>
 
       <section id="video" className="container-page scroll-mt-24 pb-16">
-        <VideoSlot label="Essential Starter Kit — product video" />
+        <VideoSlot label="Essential Starter Kit — product video" src={videos.product} poster={videos.poster} />
       </section>
 
       <section className="bg-surface section-y">

@@ -5,7 +5,7 @@ import { ImageSlot, SectionHeading, StepNumber, VideoSlot } from "@/components/s
 import { FaqList, STEPS } from "@/components/site/sections";
 import { WeekdayRing } from "@/components/site/WeekdayRing";
 import { FAQ_GROUPS } from "@/lib/faq";
-import { media } from "@/lib/media";
+import { media, videos } from "@/lib/media";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
@@ -43,7 +43,7 @@ function HowItWorks() {
               </div>
             </div>
           ))}
-          <VideoSlot />
+          <VideoSlot src={videos.howItWorks} poster={videos.poster} />
         </div>
       </section>
 
