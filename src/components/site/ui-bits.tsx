@@ -26,8 +26,19 @@ export function ImageSlot({ src, alt, slot, className, imgClassName, eager }: {
   );
 }
 
-/** Clearly marked placeholder for a product video. */
-export function VideoSlot({ label = "How it works — 15 sec video", className }: { label?: string; className?: string }) {
+/** A product film. Plays the real video once src/lib/media.ts gives it a source,
+ *  otherwise it stays a clearly marked placeholder. */
+export function VideoSlot({ label = "How it works — 15 sec video", src, poster, className }: {
+  label?: string | undefined; src?: string | null | undefined; poster?: string | undefined; className?: string | undefined;
+}) {
+  if (src) {
+    return (
+      <div data-video-slot={label} className={cn("overflow-hidden rounded-2xl bg-card shadow-soft", className)}>
+        <video src={src} poster={poster} controls playsInline preload="none" aria-label={label}
+          className="aspect-video w-full bg-surface object-cover" />
+      </div>
+    );
+  }
   return (
     <div data-video-slot={label} className={cn("relative flex aspect-video flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-gold bg-card text-center", className)}>
       <span className="grid h-16 w-16 place-items-center rounded-full border border-gold text-gold-ink">

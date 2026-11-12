@@ -36,6 +36,23 @@ export const media = {
   bottleInHand: { src: bottleInHand, alt: "A hand holding the bottle to show its size" },
 } as const;
 
+export const videos: { howItWorks: string | null; product: string | null; poster: string } = {
+  // Home page + How it works page
+  howItWorks: null,
+  // Product page
+  product: null,
+  poster: media.bottleHero.src,
+};
+
+// VIDEO SLOTS — every product film on the site comes from here.
+// Two ways to fill one in:
+//   1. Put the file in src/assets/video/ and import it at the top of this file:
+//        import howItWorksFilm from "@/assets/video/how-it-works.mp4";
+//      then set  howItWorks: howItWorksFilm,
+//   2. Or paste a hosted URL (e.g. from your CDN or Vimeo/YouTube embed):
+//        product: "https://.../product.mp4",
+// Leave a slot as null and the page keeps showing the clearly marked "Video slot" box.
+
 export const collectionBox: Record<CollectionId, string> = {
   essential: boxEssential.url,
   glow: boxGlow.url,
