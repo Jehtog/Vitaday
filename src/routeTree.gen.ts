@@ -10,18 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as IngredientsRouteImport } from './routes/ingredients'
 import { Route as OrderConfirmationRouteImport } from './routes/order-confirmation'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ProfessionalsRouteImport } from './routes/professionals'
+import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
+import { Route as StudentsRouteImport } from './routes/students'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
 import { Route as ShopEssentialStarterKitRouteImport } from './routes/shop.essential-starter-kit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -44,6 +56,11 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImprintRoute = ImprintRouteImport.update({
+  id: '/imprint',
+  path: '/imprint',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IngredientsRoute = IngredientsRouteImport.update({
   id: '/ingredients',
   path: '/ingredients',
@@ -52,6 +69,31 @@ const IngredientsRoute = IngredientsRouteImport.update({
 const OrderConfirmationRoute = OrderConfirmationRouteImport.update({
   id: '/order-confirmation',
   path: '/order-confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfessionalsRoute = ProfessionalsRouteImport.update({
+  id: '/professionals',
+  path: '/professionals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingReturnsRoute = ShippingReturnsRouteImport.update({
+  id: '/shipping-returns',
+  path: '/shipping-returns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentsRoute = StudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopIndexRoute = ShopIndexRouteImport.update({
@@ -67,35 +109,56 @@ const ShopEssentialStarterKitRoute = ShopEssentialStarterKitRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/imprint': typeof ImprintRoute
   '/ingredients': typeof IngredientsRoute
   '/order-confirmation': typeof OrderConfirmationRoute
+  '/privacy': typeof PrivacyRoute
+  '/professionals': typeof ProfessionalsRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
+  '/students': typeof StudentsRoute
+  '/terms': typeof TermsRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/imprint': typeof ImprintRoute
   '/ingredients': typeof IngredientsRoute
   '/order-confirmation': typeof OrderConfirmationRoute
+  '/privacy': typeof PrivacyRoute
+  '/professionals': typeof ProfessionalsRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
+  '/students': typeof StudentsRoute
+  '/terms': typeof TermsRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop': typeof ShopIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRoute
   '/faq': typeof FaqRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/imprint': typeof ImprintRoute
   '/ingredients': typeof IngredientsRoute
   '/order-confirmation': typeof OrderConfirmationRoute
+  '/privacy': typeof PrivacyRoute
+  '/professionals': typeof ProfessionalsRoute
+  '/shipping-returns': typeof ShippingReturnsRoute
+  '/students': typeof StudentsRoute
+  '/terms': typeof TermsRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop/': typeof ShopIndexRoute
 }
@@ -103,46 +166,74 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/checkout'
     | '/collections'
     | '/faq'
     | '/how-it-works'
+    | '/imprint'
     | '/ingredients'
     | '/order-confirmation'
+    | '/privacy'
+    | '/professionals'
+    | '/shipping-returns'
+    | '/students'
+    | '/terms'
     | '/shop/essential-starter-kit'
     | '/shop/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/account'
     | '/checkout'
     | '/collections'
     | '/faq'
     | '/how-it-works'
+    | '/imprint'
     | '/ingredients'
     | '/order-confirmation'
+    | '/privacy'
+    | '/professionals'
+    | '/shipping-returns'
+    | '/students'
+    | '/terms'
     | '/shop/essential-starter-kit'
     | '/shop'
   id:
     | '__root__'
     | '/'
+    | '/account'
     | '/checkout'
     | '/collections'
     | '/faq'
     | '/how-it-works'
+    | '/imprint'
     | '/ingredients'
     | '/order-confirmation'
+    | '/privacy'
+    | '/professionals'
+    | '/shipping-returns'
+    | '/students'
+    | '/terms'
     | '/shop/essential-starter-kit'
     | '/shop/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
   CheckoutRoute: typeof CheckoutRoute
   CollectionsRoute: typeof CollectionsRoute
   FaqRoute: typeof FaqRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  ImprintRoute: typeof ImprintRoute
   IngredientsRoute: typeof IngredientsRoute
   OrderConfirmationRoute: typeof OrderConfirmationRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ProfessionalsRoute: typeof ProfessionalsRoute
+  ShippingReturnsRoute: typeof ShippingReturnsRoute
+  StudentsRoute: typeof StudentsRoute
+  TermsRoute: typeof TermsRoute
   ShopEssentialStarterKitRoute: typeof ShopEssentialStarterKitRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
@@ -154,6 +245,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -184,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/imprint': {
+      id: '/imprint'
+      path: '/imprint'
+      fullPath: '/imprint'
+      preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ingredients': {
       id: '/ingredients'
       path: '/ingredients'
@@ -196,6 +301,41 @@ declare module '@tanstack/react-router' {
       path: '/order-confirmation'
       fullPath: '/order-confirmation'
       preLoaderRoute: typeof OrderConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/professionals': {
+      id: '/professionals'
+      path: '/professionals'
+      fullPath: '/professionals'
+      preLoaderRoute: typeof ProfessionalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping-returns': {
+      id: '/shipping-returns'
+      path: '/shipping-returns'
+      fullPath: '/shipping-returns'
+      preLoaderRoute: typeof ShippingReturnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/students': {
+      id: '/students'
+      path: '/students'
+      fullPath: '/students'
+      preLoaderRoute: typeof StudentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop/': {
@@ -217,12 +357,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
   CheckoutRoute: CheckoutRoute,
   CollectionsRoute: CollectionsRoute,
   FaqRoute: FaqRoute,
   HowItWorksRoute: HowItWorksRoute,
+  ImprintRoute: ImprintRoute,
   IngredientsRoute: IngredientsRoute,
   OrderConfirmationRoute: OrderConfirmationRoute,
+  PrivacyRoute: PrivacyRoute,
+  ProfessionalsRoute: ProfessionalsRoute,
+  ShippingReturnsRoute: ShippingReturnsRoute,
+  StudentsRoute: StudentsRoute,
+  TermsRoute: TermsRoute,
   ShopEssentialStarterKitRoute: ShopEssentialStarterKitRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
