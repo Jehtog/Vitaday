@@ -19,6 +19,7 @@ import boxCycle from "@/assets/product/box_cycle.jpg.asset.json";
 import boxJunior from "@/assets/product/box_junior.jpg.asset.json";
 import lifestyleDesk from "@/assets/lifestyle-desk.jpg";
 import bottleInHand from "@/assets/bottle-in-hand.jpg";
+import howItWorksFilm from "@/assets/video/vitaday_how_it_works.mp4.asset.json";
 import type { CollectionId } from "./catalog";
 
 export const media = {
@@ -37,21 +38,19 @@ export const media = {
 } as const;
 
 export const videos: { howItWorks: string | null; product: string | null; poster: string } = {
-  // Home page + How it works page
-  howItWorks: null,
-  // Product page
+  // Home page + How it works page — your 26-second film
+  howItWorks: howItWorksFilm.url,
+  // Product page — still empty, shows the marked "Video slot" box
   product: null,
   poster: media.bottleHero.src,
 };
 
 // VIDEO SLOTS — every product film on the site comes from here.
-// Two ways to fill one in:
-//   1. Put the file in src/assets/video/ and import it at the top of this file:
-//        import howItWorksFilm from "@/assets/video/how-it-works.mp4";
-//      then set  howItWorks: howItWorksFilm,
-//   2. Or paste a hosted URL (e.g. from your CDN or Vimeo/YouTube embed):
-//        product: "https://.../product.mp4",
-// Leave a slot as null and the page keeps showing the clearly marked "Video slot" box.
+// The howItWorks film is a CDN pointer: src/assets/video/vitaday_how_it_works.mp4.asset.json
+// (upload a file with `lovable-assets create --file <file> --filename <name>`, import the
+// printed .asset.json here and use its .url). To fill the product slot the same way, import
+// its pointer and set product: <that>.url. Leave a slot null and the page keeps showing the
+// clearly marked "Video slot" box.
 
 export const collectionBox: Record<CollectionId, string> = {
   essential: boxEssential.url,

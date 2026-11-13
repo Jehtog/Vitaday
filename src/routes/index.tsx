@@ -59,7 +59,7 @@ function Home() {
           <div className="mt-10 grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
             <VideoSlot src={videos.howItWorks} poster={videos.poster} />
             <div>
-              <p className="font-display text-3xl">Watch a whole routine in 15 seconds.</p>
+              <p className="font-display text-3xl">Watch a whole routine in 26 seconds.</p>
               <Link to="/how-it-works" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm text-gold-ink hover:underline underline-offset-4">
                 Full guide <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
