@@ -28,7 +28,7 @@ export function ImageSlot({ src, alt, slot, className, imgClassName, eager }: {
 
 /** A product film. Plays the real video once src/lib/media.ts gives it a source,
  *  otherwise it stays a clearly marked placeholder. */
-export function VideoSlot({ label = "How it works — 15 sec video", src, poster, className }: {
+export function VideoSlot({ label = "How it works — 26 sec video", src, poster, className }: {
   label?: string | undefined; src?: string | null | undefined; poster?: string | undefined; className?: string | undefined;
 }) {
   if (src) {
