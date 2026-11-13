@@ -23,8 +23,8 @@ describe("VideoSlot", () => {
     expect(video?.hasAttribute("controls")).toBe(true);
   });
 
-  it("plays the supplied how-it-works film and leaves the product slot empty", () => {
+  it("plays both supplied films", () => {
     expect(videos.howItWorks).toMatch(/^\/__l5e\/assets-v1\/.+vitaday_how_it_works\.mp4$/);
-    expect(videos.product).toBeNull();
+    expect(videos.product).toMatch(/^\/__l5e\/assets-v1\/.+vitaday_promo\.mp4$/);
   });
 });
