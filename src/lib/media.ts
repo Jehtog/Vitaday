@@ -47,11 +47,11 @@ export const videos: { howItWorks: string | null; product: string | null; poster
 };
 
 // VIDEO SLOTS — every product film on the site comes from here.
-// The howItWorks film is a CDN pointer: src/assets/video/vitaday_how_it_works.mp4.asset.json
+// Both films are CDN pointers in src/assets/video/*.mp4.asset.json
 // (upload a file with `lovable-assets create --file <file> --filename <name>`, import the
-// printed .asset.json here and use its .url). To fill the product slot the same way, import
-// its pointer and set product: <that>.url. Leave a slot null and the page keeps showing the
-// clearly marked "Video slot" box.
+// printed .asset.json here and use its .url). To swap a film, import the new pointer and
+// point the slot at its .url. Set a slot to null and the page keeps showing the clearly
+// marked "Video slot" box.
 
 export const collectionBox: Record<CollectionId, string> = {
   essential: boxEssential.url,
