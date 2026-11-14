@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { WeekdayRing } from "@/components/site/WeekdayRing";
+import { RingIcon, WeekdayRing } from "@/components/site/WeekdayRing";
 import { ImageSlot, SectionHeading, VideoSlot } from "@/components/site/ui-bits";
 import { CollectionsGrid, FaqList, HowItWorksSteps, ProblemStrip, ReviewsEmpty, StarterKitOffer } from "@/components/site/sections";
 import { NewsletterForm } from "@/components/site/NewsletterForm";
 import { media, videos } from "@/lib/media";
 import { FAQ_PREVIEW } from "@/lib/faq";
 import { PRODUCTS, formatPrice } from "@/lib/catalog";
+import { t } from "@/i18n/en";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,6 +41,13 @@ function Home() {
               <Button asChild size="lg"><Link to="/shop/essential-starter-kit">Get the Starter Kit – {formatPrice(kit.priceCents)}</Link></Button>
               <Button asChild size="lg" variant="outline"><Link to="/how-it-works">See how it works</Link></Button>
             </div>
+            <Button asChild variant="outline" className="mt-4 w-full max-w-md justify-start border-dashed px-5">
+              <Link to="/quiz">
+                <RingIcon className="text-gold-ink" />
+                <span>{t.nav.quiz}</span>
+                <span className="ml-auto text-xs font-normal text-muted-foreground">7 quick questions</span>
+              </Link>
+            </Button>
             <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">No app · No battery · No electronics</p>
           </div>
           <div className="relative mx-auto w-full max-w-[20rem] md:max-w-md">

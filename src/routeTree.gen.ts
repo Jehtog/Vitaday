@@ -20,6 +20,7 @@ import { Route as IngredientsRouteImport } from './routes/ingredients'
 import { Route as OrderConfirmationRouteImport } from './routes/order-confirmation'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProfessionalsRouteImport } from './routes/professionals'
+import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
 import { Route as StudentsRouteImport } from './routes/students'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -81,6 +82,11 @@ const ProfessionalsRoute = ProfessionalsRouteImport.update({
   path: '/professionals',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShippingReturnsRoute = ShippingReturnsRouteImport.update({
   id: '/shipping-returns',
   path: '/shipping-returns',
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/order-confirmation': typeof OrderConfirmationRoute
   '/privacy': typeof PrivacyRoute
   '/professionals': typeof ProfessionalsRoute
+  '/quiz': typeof QuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
   '/students': typeof StudentsRoute
   '/terms': typeof TermsRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/order-confirmation': typeof OrderConfirmationRoute
   '/privacy': typeof PrivacyRoute
   '/professionals': typeof ProfessionalsRoute
+  '/quiz': typeof QuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
   '/students': typeof StudentsRoute
   '/terms': typeof TermsRoute
@@ -156,6 +164,7 @@ export interface FileRoutesById {
   '/order-confirmation': typeof OrderConfirmationRoute
   '/privacy': typeof PrivacyRoute
   '/professionals': typeof ProfessionalsRoute
+  '/quiz': typeof QuizRoute
   '/shipping-returns': typeof ShippingReturnsRoute
   '/students': typeof StudentsRoute
   '/terms': typeof TermsRoute
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
     | '/order-confirmation'
     | '/privacy'
     | '/professionals'
+    | '/quiz'
     | '/shipping-returns'
     | '/students'
     | '/terms'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/order-confirmation'
     | '/privacy'
     | '/professionals'
+    | '/quiz'
     | '/shipping-returns'
     | '/students'
     | '/terms'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/order-confirmation'
     | '/privacy'
     | '/professionals'
+    | '/quiz'
     | '/shipping-returns'
     | '/students'
     | '/terms'
@@ -231,6 +243,7 @@ export interface RootRouteChildren {
   OrderConfirmationRoute: typeof OrderConfirmationRoute
   PrivacyRoute: typeof PrivacyRoute
   ProfessionalsRoute: typeof ProfessionalsRoute
+  QuizRoute: typeof QuizRoute
   ShippingReturnsRoute: typeof ShippingReturnsRoute
   StudentsRoute: typeof StudentsRoute
   TermsRoute: typeof TermsRoute
@@ -317,6 +330,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfessionalsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shipping-returns': {
       id: '/shipping-returns'
       path: '/shipping-returns'
@@ -367,6 +387,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrderConfirmationRoute: OrderConfirmationRoute,
   PrivacyRoute: PrivacyRoute,
   ProfessionalsRoute: ProfessionalsRoute,
+  QuizRoute: QuizRoute,
   ShippingReturnsRoute: ShippingReturnsRoute,
   StudentsRoute: StudentsRoute,
   TermsRoute: TermsRoute,

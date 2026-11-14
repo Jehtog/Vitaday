@@ -53,6 +53,33 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_email_results: {
+        Row: {
+          consent: boolean
+          created_at: string
+          email: string
+          id: string
+          primary_preset: string
+          secondary_preset: string | null
+        }
+        Insert: {
+          consent?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          primary_preset: string
+          secondary_preset?: string | null
+        }
+        Update: {
+          consent?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          primary_preset?: string
+          secondary_preset?: string | null
+        }
+        Relationships: []
+      }
       waitlist_signups: {
         Row: {
           collection: string

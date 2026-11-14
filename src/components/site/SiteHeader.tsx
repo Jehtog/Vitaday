@@ -12,6 +12,7 @@ const NAV = [
   { to: "/collections", label: t.nav.collections },
   { to: "/ingredients", label: t.nav.ingredients },
   { to: "/faq", label: t.nav.faq },
+  { to: "/quiz", label: t.nav.quiz },
 ] as const;
 
 export function Wordmark({ className }: { className?: string }) {
