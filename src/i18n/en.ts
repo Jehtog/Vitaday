@@ -9,6 +9,7 @@ export const en = {
     account: "Account",
     cart: "Cart",
     menu: "Menu",
+    quiz: "Find your VITADAY",
   },
   footer: {
     newsletterTitle: "Get your routine started",
