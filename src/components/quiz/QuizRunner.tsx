@@ -135,7 +135,7 @@ export function QuizRunner() {
         <div className="h-full rounded-full bg-gold transition-[width] duration-500" style={{ width: `${percent}%` }} />
       </div>
 
-      <div key={question.id} className="reveal mt-8 rounded-3xl bg-card p-6 shadow-soft md:p-8">
+      <div key={question.id} className="animate-in fade-in duration-500 mt-8 rounded-3xl bg-card p-6 shadow-soft md:p-8">
         <h2
           ref={heading}
           id="quiz-question"
