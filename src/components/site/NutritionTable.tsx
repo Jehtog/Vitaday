@@ -1,6 +1,9 @@
-import { NUTRITION_ROWS } from "@/lib/ingredients";
+import type { CollectionId } from "@/lib/catalog";
+import { COLLECTION_NUTRITION, COLLECTION_WARNINGS } from "@/lib/ingredients";
 
-export function NutritionTable() {
+export function NutritionTable({ collection = "essential" }: { collection?: CollectionId }) {
+  const rows = COLLECTION_NUTRITION[collection];
+  const warnings = COLLECTION_WARNINGS[collection] ?? [];
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[320px] text-left text-sm">
@@ -13,14 +16,15 @@ export function NutritionTable() {
           </tr>
         </thead>
         <tbody>
-          {NUTRITION_ROWS.map((r) => (
+          {rows.map((r) => (
             <tr key={r.name} className="border-b border-border/60">
-              <td className="py-2">{r.name}</td><td className="py-2">[__ {r.unit}]</td><td className="py-2">[__ %]</td>
+              <td className="py-2">{r.name}</td><td className="py-2">[__ {r.unit}]</td><td className="py-2">{r.nrv ? "[__ %]" : "**"}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p className="mt-2 text-xs text-muted-foreground">*NRV = Nutrient Reference Value</p>
+      <p className="mt-2 text-xs text-muted-foreground">*NRV = Nutrient Reference Value{rows.some((r) => !r.nrv) && " · **No NRV established"}</p>
+      {warnings.map((w) => <p key={w} className="mt-3 rounded-xl border border-gold/60 p-3 text-xs text-foreground">{w}</p>)}
     </div>
   );
 }

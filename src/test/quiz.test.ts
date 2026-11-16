@@ -83,16 +83,12 @@ describe("quiz presets", () => {
     for (const id of PRESET_ORDER) expect(PRESETS[id].id).toBe(id);
   });
 
-  it("keeps Essential's ingredient list and a placeholder for the rest", () => {
-    expect(PRESETS.essential.ingredients).toEqual([
-      "Vitamin C",
-      "Vitamin B6",
-      "Vitamin B12",
-      "Vitamin B1",
-      "Vitamin B2",
-      "Vitamin B3",
-    ]);
-    expect(PRESETS.glow.ingredients).toBeNull();
+  it("lists ingredients for every preset", () => {
+    expect(PRESETS.essential.ingredients).toContain("Thiamin (B1)");
+    expect(PRESETS.glow.ingredients).toContain("Biotin (B7)");
+    expect(PRESETS.balance.ingredients).toContain("Ashwagandha (KSM-66)");
+    expect(PRESETS.cycle.ingredients).toContain("Iron (bisglycinate)");
+    expect(PRESETS.junior.ingredients?.some((i) => /extract|caffeine/i.test(i))).toBe(false);
     expect(INGREDIENTS_PLACEHOLDER).toBe("Ingredients coming soon");
   });
 
