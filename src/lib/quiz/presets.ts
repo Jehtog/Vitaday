@@ -2,6 +2,9 @@
 // Edit names, sentences, ingredient lists and shop links here; nothing else needs to change.
 import type { CollectionId } from "@/lib/catalog";
 import { collectionBox } from "@/lib/media";
+import { COLLECTION_NUTRITION } from "@/lib/ingredients";
+
+const list = (id: CollectionId) => COLLECTION_NUTRITION[id].map((r) => r.name);
 
 export type PresetId = CollectionId;
 
@@ -44,7 +47,7 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     id: "essential",
     name: "Essential",
     blurb: "Everyday basics — vitamins C, B6, B12 and selected B vitamins, gently flavoured Lemon & Peach.",
-    ingredients: ["Vitamin C", "Vitamin B6", "Vitamin B12", "Vitamin B1", "Vitamin B2", "Vitamin B3"],
+    ingredients: list("essential"),
     image: collectionBox.essential,
     imageAlt: "VITADAY Essential 7-day refill box",
     colorClass: "bg-essential",
@@ -54,7 +57,7 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     id: "glow",
     name: "Glow",
     blurb: "A beauty-focused routine for skin, hair and nails.",
-    ingredients: null,
+    ingredients: list("glow"),
     image: collectionBox.glow,
     imageAlt: "VITADAY Glow 7-day refill box",
     colorClass: "bg-glow",
@@ -64,7 +67,7 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     id: "balance",
     name: "Balance",
     blurb: "A vitamin and mineral routine for busy, uneven days.",
-    ingredients: null,
+    ingredients: list("balance"),
     image: collectionBox.balance,
     imageAlt: "VITADAY Balance 7-day refill box",
     colorClass: "bg-balance",
@@ -74,7 +77,7 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     id: "active",
     name: "Active",
     blurb: "An electrolyte refill for training days and long walks.",
-    ingredients: null,
+    ingredients: list("active"),
     image: collectionBox.active,
     imageAlt: "VITADAY Active 7-day refill box",
     colorClass: "bg-active",
@@ -84,7 +87,7 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     id: "focus",
     name: "Focus",
     blurb: "A routine built around study days and desk days.",
-    ingredients: null,
+    ingredients: list("focus"),
     image: collectionBox.focus,
     imageAlt: "VITADAY Focus 7-day refill box",
     colorClass: "bg-focus",
@@ -94,7 +97,7 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     id: "cycle",
     name: "Cycle",
     blurb: "A convenient routine you keep to hand around your cycle.",
-    ingredients: null,
+    ingredients: list("cycle"),
     image: collectionBox.cycle,
     imageAlt: "VITADAY Cycle 7-day refill box",
     colorClass: "bg-cycle",
@@ -104,7 +107,7 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     id: "junior",
     name: "Junior",
     blurb: "A routine for children, developed with paediatric nutrition experts before launch.",
-    ingredients: null,
+    ingredients: list("junior"),
     image: collectionBox.junior,
     imageAlt: "VITADAY Junior 7-day refill box",
     colorClass: "bg-junior",

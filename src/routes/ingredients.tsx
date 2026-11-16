@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { COLLECTIONS, type CollectionId } from "@/lib/catalog";
+import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { AlertTriangle, Leaf, MapPin, Citrus } from "lucide-react";
 import { SectionHeading, ImageSlot } from "@/components/site/ui-bits";
@@ -21,6 +23,7 @@ export const Route = createFileRoute("/ingredients")({
 });
 
 function Ingredients() {
+  const [col, setCol] = useState<CollectionId>("essential");
   return (
     <>
       <section className="section-y bg-essential">
@@ -34,7 +37,15 @@ function Ingredients() {
         <div className="container-page grid gap-10 md:grid-cols-[1.4fr_1fr]">
           <div className="min-w-0 rounded-3xl bg-card p-6 shadow-soft md:p-10">
             <h2 className="text-3xl">Nutrition facts</h2>
-            <div className="mt-6"><NutritionTable /></div>
+            <div role="tablist" aria-label="Collection" className="mt-5 flex flex-wrap gap-2">
+              {COLLECTIONS.map((c) => (
+                <button key={c.id} role="tab" aria-selected={c.id === col} onClick={() => setCol(c.id)}
+                  className={cn("min-h-11 rounded-full border px-4 text-sm", c.id === col ? "border-gold bg-surface" : "border-border")}>
+                  {c.name}{!c.available && <span className="ml-1 text-xs text-muted-foreground">· soon</span>}
+                </button>
+              ))}
+            </div>
+            <div className="mt-6"><NutritionTable collection={col} /></div>
           </div>
           <div className="space-y-5">
             <Info icon={<Leaf className="h-5 w-5" />} title="Key vitamins">Vitamin C, vitamin B6, vitamin B12 and selected B vitamins.</Info>
