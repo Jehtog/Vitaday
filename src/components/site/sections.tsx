@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { CollectionIcon } from "./CollectionIcon";
 import { ImageSlot, SectionHeading, StepNumber } from "./ui-bits";
 import { WaitlistDialog } from "./WaitlistDialog";
+import { keyIngredients } from "@/lib/ingredients";
 
 export const STEPS = [
   { title: "Open the cap", text: "Lift the cap off your VITADAY bottle.", img: media.stepOpen },
@@ -165,17 +166,21 @@ export function CollectionsGrid({ showVotes = false, compact = false }: { showVo
           return (
             <li key={c.id} className={cn("flex flex-col overflow-hidden rounded-2xl shadow-soft", c.colorClass, compact && c.available && "col-span-2 md:col-span-1")}>
               <div className={cn("relative", future && "opacity-75 saturate-[0.7]")}>
-                <ImageSlot slot={`collection-${c.id}`} src={collectionBox[c.id]} alt={`VITADAY ${c.name} 7-day refill box`} className="aspect-[4/5] rounded-none" />
+                <Link to={c.available ? "/shop/essential-starter-kit" : "/collections/$id"} params={{ id: c.id }} aria-label={`See ${c.name} details`}>
+                  <ImageSlot slot={`collection-${c.id}`} src={collectionBox[c.id]} alt={`VITADAY ${c.name} 7-day refill box`} className="aspect-[4/5] rounded-none" />
+                </Link>
                 {future && <span className="absolute left-3 top-3 rounded-full bg-card/90 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-foreground">Coming soon</span>}
                 {!future && <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-primary-foreground">Available</span>}
               </div>
               <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-center gap-2">
                   <CollectionIcon id={c.id} className="h-5 w-5 text-foreground/80" />
-                  <h3 className="font-display text-2xl">{c.name}</h3>
+                  <h3 className="font-display text-2xl"><Link to={c.available ? "/shop/essential-starter-kit" : "/collections/$id"} params={{ id: c.id }} className="hover:text-gold-ink">{c.name}</Link></h3>
                 </div>
                 <p className="text-sm text-muted-foreground">{c.tagline}</p>
                 {!compact && <p className="mt-3 text-sm text-foreground/80">{c.description}</p>}
+                {!compact && future && <p className="mt-2 text-xs text-muted-foreground">Key ingredients: {keyIngredients(c.id)}, and more.</p>}
+                {future && <Link to="/collections/$id" params={{ id: c.id }} className="mt-3 inline-flex min-h-11 items-center text-sm text-gold-ink underline underline-offset-4">See details & ingredients</Link>}
                 <div className="mt-auto pt-5">
                   {c.available ? (
                     <Button asChild className="w-full"><Link to="/shop/essential-starter-kit">Shop now</Link></Button>

@@ -15,8 +15,8 @@ export const COLLECTION_NUTRITION: Record<CollectionId, NutritionRow[]> = {
   essential: [v("Vitamin C", "mg"), v("Vitamin B6", "mg"), v("Vitamin B12", "µg"), v("Thiamin (B1)", "mg"), v("Riboflavin (B2)", "mg"), v("Niacin (B3)", "mg")],
   glow: [v("Biotin (B7)", "µg"), v("Vitamin C", "mg"), v("Zinc", "mg"), v("Vitamin E", "mg"), x("Collagen peptides"), x("Hyaluronic acid"), x("Silicon (bamboo or silica extract)")],
   balance: [v("Magnesium (bisglycinate)", "mg"), x("Ashwagandha (KSM-66)"), x("L-Theanine"), v("Vitamin B6", "mg"), v("Vitamin D3", "µg"), x("Lemon balm extract"), v("Pantothenic acid (B5)", "mg")],
-  active: [x("Caffeine (from green tea)"), x("L-Theanine"), x("Rhodiola extract"), x("Citicoline (choline)"), v("Vitamin B12 (methylcobalamin)", "µg"), v("Magnesium", "mg"), v("Potassium", "mg"), x("Sodium")],
-  focus: [x("Caffeine (from green tea)"), x("L-Theanine"), x("Rhodiola extract"), x("Citicoline (choline)"), v("Vitamin B12 (methylcobalamin)", "µg"), v("Magnesium", "mg"), v("Potassium", "mg"), x("Sodium")],
+  active: [v("Magnesium (citrate or bisglycinate)", "mg"), v("Sodium", "mg"), v("Potassium", "mg"), x("Creatine monohydrate"), x("Beta-alanine"), x("L-Citrulline"), x("Tart cherry extract"), v("Vitamin D3", "µg")],
+  focus: [x("Caffeine (from green tea)"), x("L-Theanine"), x("Citicoline (choline)"), x("Rhodiola extract"), x("Bacopa extract"), v("Vitamin B12 (methylcobalamin)", "µg"), v("Magnesium (L-threonate or bisglycinate)", "mg")],
   cycle: [v("Iron (bisglycinate)", "mg"), v("Vitamin C", "mg"), v("Vitamin B6", "mg"), v("Magnesium", "mg"), v("Zinc", "mg"), x("Ginger extract"), x("Chasteberry extract")],
   junior: [v("Vitamin D3", "µg"), v("Vitamin C", "mg"), v("Zinc", "mg"), v("Vitamin A", "µg"), v("Vitamin B12", "µg"), v("Iodine", "µg"), v("Selenium", "µg")],
 };
@@ -26,7 +26,7 @@ export const NUTRITION_ROWS = COLLECTION_NUTRITION.essential;
 
 /** Extra warnings per collection, shown with the nutrition table and in the quiz result. */
 export const COLLECTION_WARNINGS: Partial<Record<CollectionId, string[]>> = {
-  active: ["Contains caffeine. Not suitable for children or for pregnant or breastfeeding women."],
+  active: ["Contains beta-alanine, which can cause a harmless, temporary tingling of the skin.", "Creatine may be offered in a reduced amount or as a separate add-on, as a typical daily amount (about 3 g) is a lot of powder for one chamber."],
   focus: ["Contains caffeine. Not suitable for children or for pregnant or breastfeeding women."],
   balance: ["Contains ashwagandha. Not suitable during pregnancy or for people with thyroid conditions."],
   cycle: ["Contains iron. Iron is not right for everyone — an iron-free option is planned."],
@@ -46,3 +46,8 @@ export const HEALTH_CLAIMS = [
   "Vitamin B6 contributes to normal energy-yielding metabolism.",
   "Vitamin B12 contributes to the reduction of tiredness and fatigue.",
 ] as const;
+
+/** A short "key ingredients" line for collection previews. */
+export function keyIngredients(id: CollectionId, count = 4): string {
+  return COLLECTION_NUTRITION[id].slice(0, count).map((r) => r.name.replace(/ \(.*\)$/, "")).join(", ");
+}

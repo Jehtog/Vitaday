@@ -24,6 +24,7 @@ import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as ShippingReturnsRouteImport } from './routes/shipping-returns'
 import { Route as StudentsRouteImport } from './routes/students'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as CollectionsIdRouteImport } from './routes/collections_.$id'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
 import { Route as ShopEssentialStarterKitRouteImport } from './routes/shop.essential-starter-kit'
 
@@ -102,6 +103,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsIdRoute = CollectionsIdRouteImport.update({
+  id: '/collections_/$id',
+  path: '/collections/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopIndexRoute = ShopIndexRouteImport.update({
   id: '/shop/',
   path: '/shop/',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/shipping-returns': typeof ShippingReturnsRoute
   '/students': typeof StudentsRoute
   '/terms': typeof TermsRoute
+  '/collections/$id': typeof CollectionsIdRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop/': typeof ShopIndexRoute
 }
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/shipping-returns': typeof ShippingReturnsRoute
   '/students': typeof StudentsRoute
   '/terms': typeof TermsRoute
+  '/collections/$id': typeof CollectionsIdRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop': typeof ShopIndexRoute
 }
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/shipping-returns': typeof ShippingReturnsRoute
   '/students': typeof StudentsRoute
   '/terms': typeof TermsRoute
+  '/collections_/$id': typeof CollectionsIdRoute
   '/shop/essential-starter-kit': typeof ShopEssentialStarterKitRoute
   '/shop/': typeof ShopIndexRoute
 }
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/shipping-returns'
     | '/students'
     | '/terms'
+    | '/collections/$id'
     | '/shop/essential-starter-kit'
     | '/shop/'
   fileRoutesByTo: FileRoutesByTo
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/shipping-returns'
     | '/students'
     | '/terms'
+    | '/collections/$id'
     | '/shop/essential-starter-kit'
     | '/shop'
   id:
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/shipping-returns'
     | '/students'
     | '/terms'
+    | '/collections_/$id'
     | '/shop/essential-starter-kit'
     | '/shop/'
   fileRoutesById: FileRoutesById
@@ -247,6 +259,7 @@ export interface RootRouteChildren {
   ShippingReturnsRoute: typeof ShippingReturnsRoute
   StudentsRoute: typeof StudentsRoute
   TermsRoute: typeof TermsRoute
+  CollectionsIdRoute: typeof CollectionsIdRoute
   ShopEssentialStarterKitRoute: typeof ShopEssentialStarterKitRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
@@ -358,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections_/$id': {
+      id: '/collections_/$id'
+      path: '/collections/$id'
+      fullPath: '/collections/$id'
+      preLoaderRoute: typeof CollectionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop/': {
       id: '/shop/'
       path: '/shop'
@@ -391,6 +411,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShippingReturnsRoute: ShippingReturnsRoute,
   StudentsRoute: StudentsRoute,
   TermsRoute: TermsRoute,
+  CollectionsIdRoute: CollectionsIdRoute,
   ShopEssentialStarterKitRoute: ShopEssentialStarterKitRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
