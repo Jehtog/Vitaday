@@ -179,7 +179,8 @@ export function CollectionsGrid({ showVotes = false, compact = false }: { showVo
                 </div>
                 <p className="text-sm text-muted-foreground">{c.tagline}</p>
                 {!compact && <p className="mt-3 text-sm text-foreground/80">{c.description}</p>}
-                {!compact && future && <p className="mt-2 text-xs text-muted-foreground">Key ingredients: {keyIngredients(c.id)}, and more.</p>}
+                {!compact && <p className="mt-2 text-xs text-muted-foreground">Key ingredients: {keyIngredients(c.id)}, and more.</p>}
+                {!compact && c.flavor && <p className="mt-1 text-xs text-muted-foreground">Flavour: {c.flavor}</p>}
                 {future && <Link to="/collections/$id" params={{ id: c.id }} className="mt-3 inline-flex min-h-11 items-center text-sm text-gold-ink underline underline-offset-4">See details & ingredients</Link>}
                 <div className="mt-auto pt-5">
                   {c.available ? (
