@@ -45,11 +45,18 @@ function ProductPage() {
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
   const [window_, setWindow] = useState<[Date, Date] | null>(null);
+  const [openSection, setOpenSection] = useState("");
   const { add } = useCart();
   const current = GALLERY[active] ?? GALLERY[0]!;
 
   useEffect(() => setWindow(deliveryWindow(new Date())), []);
   useEffect(() => { if (search.option) setOption(search.option); }, [search.option]);
+  // Arriving from a "See details & ingredients" link: open that section and bring it into view.
+  useEffect(() => {
+    if (window.location.hash !== "#ingredients") return;
+    setOpenSection("Ingredients & nutrition facts");
+    requestAnimationFrame(() => document.getElementById("ingredients")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  }, []);
 
   const product = PRODUCTS[option];
 
@@ -144,13 +151,13 @@ function ProductPage() {
             </ul>
           </div>
 
-          <Accordion type="single" collapsible className="mt-8">
+          <Accordion type="single" collapsible className="mt-8" value={openSection} onValueChange={(v) => setOpenSection(typeof v === "string" ? v : "")}>
             <PdpSection title="How it works">
               <ol className="list-decimal space-y-1 pl-5">
                 <li>Open the cap.</li><li>Drop in your Weekly Refill Ring.</li><li>Rotate to today, press, shake and drink.</li>
               </ol>
             </PdpSection>
-            <PdpSection title="Ingredients & nutrition facts">
+            <PdpSection title="Ingredients & nutrition facts" id="ingredients">
               <NutritionTable />
             </PdpSection>
             <PdpSection title="Allergens">
@@ -199,9 +206,9 @@ function ProductPage() {
   );
 }
 
-function PdpSection({ title, children }: { title: string; children: ReactNode }) {
+function PdpSection({ title, id, children }: { title: string; id?: string; children: ReactNode }) {
   return (
-    <AccordionItem value={title} className="border-border">
+    <AccordionItem value={title} id={id} className={cn("border-border", id && "scroll-mt-24")}>
       <AccordionTrigger className="min-h-14 text-base font-normal hover:no-underline">{title}</AccordionTrigger>
       <AccordionContent className="text-sm text-muted-foreground">{children}</AccordionContent>
     </AccordionItem>

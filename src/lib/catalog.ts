@@ -92,7 +92,7 @@ export interface Collection {
 }
 
 export const COLLECTIONS: Collection[] = [
-  { id: "essential", name: "Essential", tagline: "Everyday Wellness", description: "Our daily multivitamin with vitamins C, B6, B12 and selected B vitamins.", available: true, colorClass: "bg-essential", flavor: "Lemon & Peach" },
+  { id: "essential", name: "Essential", tagline: "Everyday Wellness", description: "Your daily multivitamin.", available: true, colorClass: "bg-essential", flavor: "Lemon & Peach" },
   { id: "glow", name: "Glow", tagline: "Beauty & Wellness", description: "A beauty-focused routine in development.", available: false, colorClass: "bg-glow" },
   { id: "balance", name: "Balance", tagline: "Daily Vitality", description: "A vitamin and mineral routine for busy days, in development.", available: false, colorClass: "bg-balance" },
   { id: "active", name: "Active", tagline: "Sports & Hydration", description: "An electrolyte refill for active days, in development.", available: false, colorClass: "bg-active" },
