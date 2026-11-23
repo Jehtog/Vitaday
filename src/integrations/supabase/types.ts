@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      bot_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          product_id: string | null
+          quantity: number | null
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          product_id?: string | null
+          quantity?: number | null
+          source: string
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          product_id?: string | null
+          quantity?: number | null
+          source?: string
+        }
+        Relationships: []
+      }
       collection_votes: {
         Row: {
           collection: string

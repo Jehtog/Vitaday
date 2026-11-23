@@ -29,6 +29,13 @@
       "when": 1795276593616,
       "tag": "0003_restrict_signup_inserts",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795432746675,
+      "tag": "0004_create_bot_events",
+      "breakpoints": true
     }
   ]
 }

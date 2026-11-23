@@ -18,6 +18,7 @@ import { SiteHeader, Wordmark } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { CartDrawer } from "@/components/site/CartDrawer";
 import { CookieBanner } from "@/components/site/CookieBanner";
+import { AddedToCartPopup, WhatsAppFloat } from "@/components/site/WhatsAppBot";
 import { Toaster } from "@/components/ui/sonner";
 
 // Ad landing pages show no main navigation.
@@ -154,6 +155,8 @@ function RootComponent() {
         {!isLanding && <SiteFooter />}
         <CartDrawer />
         <CookieBanner />
+        <AddedToCartPopup />
+        <WhatsAppFloat />
         <Toaster position="top-center" />
       </CartProvider>
     </QueryClientProvider>

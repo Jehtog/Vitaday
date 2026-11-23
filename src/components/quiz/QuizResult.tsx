@@ -6,6 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ImageSlot } from "@/components/site/ui-bits";
+import { WhatsAppLink } from "@/components/site/WhatsAppBot";
+import { botMessages } from "@/lib/whatsapp";
 import { track } from "@/lib/analytics";
 import { saveQuizResult } from "@/lib/signups";
 import { INGREDIENTS_PLACEHOLDER, PRESETS, presetShopUrl } from "@/lib/quiz/presets";
@@ -57,6 +59,10 @@ export function QuizResult({ outcome, onRetake }: { outcome: QuizOutcome; onReta
               Get {main.name} now
             </a>
           </Button>
+          <div className="mt-6 rounded-2xl bg-surface p-5 text-center">
+            <p className="text-sm text-muted-foreground">Questions about your result? Ask our VITADAY assistant on WhatsApp.</p>
+            <WhatsAppLink message={botMessages.quiz(main.name)} source="quiz_result" label="Chat with VITADAY" variant="outline" className="mt-3 w-full" />
+          </div>
         </div>
       </section>
 
