@@ -5,7 +5,6 @@ import { NewsletterForm } from "./NewsletterForm";
 import { openCookieSettings } from "./CookieBanner";
 import { Wordmark } from "./SiteHeader";
 
-const PAYMENTS = ["Visa", "Mastercard", "PayPal", "Apple Pay", "MB WAY", "Multibanco"];
 
 export function SiteFooter() {
   return (
@@ -48,11 +47,9 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="container-page flex flex-col items-start justify-between gap-4 py-6 md:flex-row md:items-center">
           <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} VITADAY. Food supplement. Not a substitute for a varied diet.</p>
-          <ul className="flex flex-wrap gap-2" aria-label="Accepted payment methods">
-            {PAYMENTS.map((p) => (
-              <li key={p} className="rounded-md border border-border bg-card px-2.5 py-1 text-[11px] tracking-wide text-muted-foreground">{p}</li>
-            ))}
-          </ul>
+          <p className="text-xs text-muted-foreground">
+            A student project at Cat&oacute;lica Lisbon. Not for sale yet, and no payment is taken.
+          </p>
         </div>
       </div>
     </footer>

@@ -15,6 +15,7 @@ export function WaitlistDialog({ collection, onOpenChange }: {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "saving" | "done">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
   const info = COLLECTIONS.find((c) => c.id === collection);
 
   const submit = async (e: FormEvent) => {
@@ -56,10 +57,17 @@ export function WaitlistDialog({ collection, onOpenChange }: {
                     onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="h-11 rounded-xl bg-background" />
                   {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
                 </div>
-                <Button type="submit" className="w-full" disabled={status === "saving"}>
+                <label className="flex cursor-pointer items-start gap-2 text-xs text-muted-foreground">
+                  <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 shrink-0" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+                  <span>I agree that VITADAY may email me when this collection launches.</span>
+                </label>
+                <Button type="submit" className="w-full" disabled={status === "saving" || !consent}>
                   {status === "saving" ? "Joining…" : "Join the waitlist"}
                 </Button>
-                <p className="text-xs text-muted-foreground">We store your email only to tell you about this collection. Unsubscribe anytime.</p>
+                <p className="text-xs text-muted-foreground">
+                  We store your email only to tell you about this collection, and nothing else.
+                  You can withdraw at any time, see our privacy policy for how.
+                </p>
               </form>
             )}
           </>

@@ -4,7 +4,6 @@ export type ProductId =
   | "starter-kit"
   | "bottle"
   | "refill-7"
-  | "refill-28"
   | "subscription-28";
 
 export interface Product {
@@ -37,19 +36,13 @@ export const PRODUCTS: Record<ProductId, Product> = {
     short: "1 Weekly Refill Ring",
     priceCents: 599,
   },
-  "refill-28": {
-    id: "refill-28",
-    name: "Essential 28-day refill",
-    short: "4 Weekly Refill Rings",
-    priceCents: 1999,
-  },
   "subscription-28": {
     id: "subscription-28",
     name: "Essential monthly subscription",
     short: "28 portions, delivered monthly",
     priceCents: 1799,
     recurring: "month",
-    badge: "Save 10%",
+    badge: "Save 25%",
     note: "Pause, skip or cancel anytime in 2 clicks",
   },
 };
@@ -58,7 +51,6 @@ export const PURCHASE_OPTIONS: ProductId[] = [
   "starter-kit",
   "bottle",
   "refill-7",
-  "refill-28",
   "subscription-28",
 ];
 
