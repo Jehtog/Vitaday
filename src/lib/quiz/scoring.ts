@@ -4,7 +4,7 @@ import { QUESTIONS, optionPreset, type AnswerMap, type QuizOption, type QuizQues
 
 export interface QuizOutcome {
   primary: PresetId;
-  /** null when there is no second fit — e.g. a Junior-only result. */
+  /** null when nothing else scored above zero. */
   secondary: PresetId | null;
   scores: Record<PresetId, number>;
 }
@@ -37,7 +37,7 @@ export function scoreQuiz(answers: AnswerMap): QuizOutcome {
   for (const question of QUESTIONS) {
     const option = asked(question, answers);
     if (!option) continue;
-    // An answer can end the quiz outright (Q1 "For my child" → Junior alone).
+    // An answer may end the quiz outright and name its own result.
     if (option.resultPreset) return { primary: option.resultPreset, secondary: null, scores };
     for (const [preset, points] of Object.entries(option.points ?? {})) {
       scores[preset as PresetId] = (scores[preset as PresetId] ?? 0) + (points ?? 0);
@@ -53,10 +53,7 @@ export function scoreQuiz(answers: AnswerMap): QuizOutcome {
   );
 
   const primary = ranked.find((id) => (scores[id] ?? 0) > 0) ?? "essential";
-  const secondary =
-    primary === "junior"
-      ? null
-      : ranked.find((id) => id !== primary && (scores[id] ?? 0) > 0) ?? null;
+  const secondary = ranked.find((id) => id !== primary && (scores[id] ?? 0) > 0) ?? null;
 
   return { primary, secondary, scores };
 }

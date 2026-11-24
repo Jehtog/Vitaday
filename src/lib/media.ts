@@ -16,7 +16,6 @@ import boxBalance from "@/assets/product/box_balance.jpg.asset.json";
 import boxActive from "@/assets/product/box_active.jpg.asset.json";
 import boxFocus from "@/assets/product/box_focus.jpg.asset.json";
 import boxCycle from "@/assets/product/box_cycle.jpg.asset.json";
-import boxJunior from "@/assets/product/box_junior.jpg.asset.json";
 import lifestyleDesk from "@/assets/lifestyle-desk.jpg";
 import bottleInHand from "@/assets/bottle-in-hand.jpg";
 import howItWorksFilm from "@/assets/video/vitaday_how_it_works.mp4.asset.json";
@@ -60,5 +59,4 @@ export const collectionBox: Record<CollectionId, string> = {
   active: boxActive.url,
   focus: boxFocus.url,
   cycle: boxCycle.url,
-  junior: boxJunior.url,
 };

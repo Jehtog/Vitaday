@@ -49,7 +49,7 @@ function Shop() {
                   <p className="text-sm text-muted-foreground">{p.note ?? p.short}</p>
                   <p className="mt-4 text-lg">{formatPrice(p.priceCents)}{p.recurring && <span className="text-sm text-muted-foreground">/month</span>}</p>
                   <div className="mt-auto flex gap-2 pt-6">
-                    <Button className="flex-1" onClick={() => add(id)}>Add to cart</Button>
+                    <Button className="flex-1" onClick={() => add(id)}>Reserve</Button>
                     <Button asChild variant="outline"><Link to="/shop/essential-starter-kit" search={{ option: id }}>Details</Link></Button>
                   </div>
                 </div>

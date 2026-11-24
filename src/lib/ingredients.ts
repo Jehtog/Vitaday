@@ -18,7 +18,6 @@ export const COLLECTION_NUTRITION: Record<CollectionId, NutritionRow[]> = {
   active: [v("Magnesium (citrate or bisglycinate)", "mg"), v("Sodium", "mg"), v("Potassium", "mg"), x("Creatine monohydrate"), x("Beta-alanine"), x("L-Citrulline"), x("Tart cherry extract"), v("Vitamin D3", "µg")],
   focus: [x("Caffeine (from green tea)"), x("L-Theanine"), x("Citicoline (choline)"), x("Rhodiola extract"), x("Bacopa extract"), v("Vitamin B12 (methylcobalamin)", "µg"), v("Magnesium (L-threonate or bisglycinate)", "mg")],
   cycle: [v("Iron (bisglycinate)", "mg"), v("Vitamin C", "mg"), v("Vitamin B6", "mg"), v("Magnesium", "mg"), v("Zinc", "mg"), x("Ginger extract"), x("Chasteberry extract")],
-  junior: [v("Vitamin D3", "µg"), v("Vitamin C", "mg"), v("Zinc", "mg"), v("Vitamin A", "µg"), v("Vitamin B12", "µg"), v("Iodine", "µg"), v("Selenium", "µg")],
 };
 
 /** Kept for existing callers: the Essential rows. */
@@ -30,7 +29,6 @@ export const COLLECTION_WARNINGS: Partial<Record<CollectionId, string[]>> = {
   focus: ["Contains caffeine. Not suitable for children or for pregnant or breastfeeding women."],
   balance: ["Contains ashwagandha. Not suitable during pregnancy or for people with thyroid conditions."],
   cycle: ["Contains iron. Iron is not right for everyone — an iron-free option is planned."],
-  junior: ["Made for children aged about 4–12, with age-appropriate amounts. No plant extracts and no caffeine."],
 };
 
 export const MANDATORY_NOTES = [

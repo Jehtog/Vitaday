@@ -38,14 +38,14 @@ function Home() {
             </h1>
             <p className="mt-6 max-w-md text-lg text-muted-foreground">Seven days of vitamins, built into the bottle you already carry.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg"><Link to="/shop/essential-starter-kit">Get the Starter Kit – {formatPrice(kit.priceCents)}</Link></Button>
+              <Button asChild size="lg"><Link to="/shop/essential-starter-kit">Reserve the Starter Kit – {formatPrice(kit.priceCents)}</Link></Button>
               <Button asChild size="lg" variant="outline"><Link to="/how-it-works">See how it works</Link></Button>
             </div>
             <Button asChild variant="outline" className="mt-4 w-full max-w-md justify-start border-dashed px-5">
               <Link to="/quiz">
                 <RingIcon className="text-gold-ink" />
                 <span>{t.nav.quiz}</span>
-                <span className="ml-auto text-xs font-normal text-muted-foreground">7 quick questions</span>
+                <span className="ml-auto text-xs font-normal text-muted-foreground">6 quick questions</span>
               </Link>
             </Button>
             <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">No app · No battery · No electronics</p>
@@ -141,7 +141,7 @@ function Home() {
       {/* REVIEWS */}
       <section className="section-y bg-surface">
         <div className="container-page">
-          <SectionHeading eyebrow="Reviews" title="Honest words, coming soon." />
+          <SectionHeading eyebrow="Who we are" title="Built by students at Católica Lisbon." />
           <div className="mt-12"><ReviewsEmpty /></div>
         </div>
       </section>

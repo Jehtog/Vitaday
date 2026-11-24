@@ -76,8 +76,7 @@ export type CollectionId =
   | "balance"
   | "active"
   | "focus"
-  | "cycle"
-  | "junior";
+  | "cycle";
 
 export interface Collection {
   id: CollectionId;
@@ -98,7 +97,6 @@ export const COLLECTIONS: Collection[] = [
   { id: "active", name: "Active", tagline: "Sports & Hydration", description: "An electrolyte refill for active days, in development.", available: false, colorClass: "bg-active" },
   { id: "focus", name: "Focus", tagline: "Student Wellness", description: "A routine for academic life, in development.", available: false, colorClass: "bg-focus" },
   { id: "cycle", name: "Cycle", tagline: "Menstrual Wellness", description: "A convenient routine around your cycle, in development.", available: false, colorClass: "bg-cycle" },
-  { id: "junior", name: "Junior", tagline: "Kids' Wellness", description: "Developed with paediatric nutrition experts before launch.", available: false, colorClass: "bg-junior" },
 ];
 
 export const WEEKDAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as const;

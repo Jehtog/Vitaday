@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Check, Clock, PackageOpen, Star, ThumbsUp, CircleHelp } from "lucide-react";
+import { Check, Clock, GraduationCap, PackageOpen, ThumbsUp, CircleHelp } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { COLLECTIONS, PRODUCTS, formatPrice, type CollectionId } from "@/lib/catalog";
@@ -83,7 +83,7 @@ export function StarterKitOffer({ className, showDetailsLink = true }: { classNa
         <div role="radiogroup" aria-label="Purchase type" className="mt-6 grid gap-3">
           {([
             { id: "once", title: "One-time purchase", price: formatPrice(kit.priceCents), note: "Bottle + 7-day ring" },
-            { id: "subscribe", title: "Subscribe & save 10%", price: `${formatPrice(kit.priceCents)} + ${formatPrice(sub.priceCents)}/mo`, note: "Starter Kit + monthly refills. Pause, skip or cancel anytime." },
+            { id: "subscribe", title: "Subscribe & save 10%", price: `${formatPrice(kit.priceCents)} + ${formatPrice(sub.priceCents)}/mo`, note: "Starter Kit + monthly refills, about €0.60 a day. Pause, skip or cancel anytime." },
           ] as const).map((o) => (
             <button key={o.id} role="radio" aria-checked={mode === o.id} onClick={() => setMode(o.id)}
               className={cn("flex min-h-14 items-center gap-3 rounded-2xl border p-4 text-left transition-colors",
@@ -103,8 +103,13 @@ export function StarterKitOffer({ className, showDetailsLink = true }: { classNa
         </div>
 
         <Button size="lg" className="mt-6" onClick={buy}>
-          {mode === "once" ? `Get the Starter Kit – ${formatPrice(kit.priceCents)}` : "Start my subscription"}
+          {mode === "once" ? "Reserve the Starter Kit" : "Reserve with monthly refills"}
         </Button>
+        <p className="mt-4 text-xs text-muted-foreground">
+          No payment is taken. VITADAY is a student project at Católica Lisbon and is not on sale yet.
+          Reserving records a non-binding letter of intent so we know you are interested, and we will
+          email you when it is available.
+        </p>
         {showDetailsLink && <Link to="/shop/essential-starter-kit" className="mt-4 text-center text-sm text-gold-ink underline-offset-4 hover:underline">See all details</Link>}
       </div>
     </div>
@@ -127,12 +132,13 @@ export function FaqList({ items, className }: { items: FaqItem[]; className?: st
 export function ReviewsEmpty() {
   return (
     <div className="mx-auto max-w-2xl rounded-3xl border border-dashed border-gold bg-card p-8 text-center md:p-12">
-      <Star className="mx-auto h-7 w-7 text-gold-ink" strokeWidth={1.2} aria-hidden="true" />
-      <h3 className="mt-4 font-display text-3xl">Be one of our first reviewers</h3>
+      <GraduationCap className="mx-auto h-7 w-7 text-gold-ink" strokeWidth={1.2} aria-hidden="true" />
+      <h3 className="mt-4 font-display text-3xl">A student project, tested in public</h3>
       <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-        We only show reviews from verified buyers and beta testers. VITADAY is brand new — once our first routines are underway, their honest words will appear here.
+        VITADAY is a student start-up from Católica Lisbon School of Business and Economics. We interviewed
+        people about how they really take their vitamins, and VITADAY is what we are building from what they told us.
       </p>
-      <p className="mt-6 eyebrow">Verified reviews only</p>
+      <p className="mt-6 eyebrow">Reserve, don’t buy — nothing is for sale yet</p>
     </div>
   );
 }
@@ -188,7 +194,7 @@ export function CollectionsGrid({ showVotes = false, compact = false }: { showVo
                 )}
                 <div className="mt-auto pt-5">
                   {c.available ? (
-                    <Button asChild className="w-full"><Link to="/shop/essential-starter-kit">Shop now</Link></Button>
+                    <Button asChild className="w-full"><Link to="/shop/essential-starter-kit">Reserve</Link></Button>
                   ) : (
                     <div className="space-y-2">
                       <Button variant="outline" className="w-full bg-card/60" onClick={() => setWaitlist(c.id as FutureId)}>Join the waitlist</Button>

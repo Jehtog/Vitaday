@@ -1,4 +1,4 @@
-import { Dumbbell, Droplet, GraduationCap, Leaf, Smile, Sparkles } from "lucide-react";
+import { Dumbbell, Droplet, GraduationCap, Leaf, Sparkles } from "lucide-react";
 import type { CollectionId } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +21,5 @@ export function CollectionIcon({ id, className }: { id: CollectionId; className?
     case "active": return <Dumbbell className={cls} strokeWidth={1.4} aria-hidden="true" />;
     case "focus": return <GraduationCap className={cls} strokeWidth={1.4} aria-hidden="true" />;
     case "cycle": return <Droplet className={cls} strokeWidth={1.4} aria-hidden="true" />;
-    case "junior": return <Smile className={cls} strokeWidth={1.4} aria-hidden="true" />;
   }
 }

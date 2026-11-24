@@ -91,7 +91,7 @@ function HowItWorks() {
           <h2 className="mt-3 text-4xl">Still curious?</h2>
           <FaqList items={FAQ_GROUPS[0]?.items ?? []} className="mt-6" />
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild><Link to="/shop/essential-starter-kit">Get the Starter Kit</Link></Button>
+            <Button asChild><Link to="/shop/essential-starter-kit">Reserve the Starter Kit</Link></Button>
             <Button asChild variant="outline"><Link to="/faq">All questions</Link></Button>
           </div>
         </div>

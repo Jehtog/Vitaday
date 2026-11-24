@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent, type InputHTMLAttributes } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Lock } from "lucide-react";
+import { FileSignature } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,42 +8,40 @@ import { Label } from "@/components/ui/label";
 import { RingProgress } from "@/components/site/WeekdayRing";
 import { useCart } from "@/lib/cart";
 import { PRODUCTS, formatPrice } from "@/lib/catalog";
+import { recordLetterOfIntent } from "@/lib/signups";
 import { cn } from "@/lib/utils";
 
-const STEPS = ["Cart", "Details", "Payment", "Done"];
-const PAYMENT_METHODS = ["Card", "PayPal", "Apple Pay", "MB WAY", "Multibanco"] as const;
+const STEPS = ["Review", "Your details", "Letter of intent", "Done"];
 
 const detailsSchema = z.object({
   email: z.string().trim().email("Enter a valid email"),
   name: z.string().trim().min(2, "Enter your full name").max(100),
-  address: z.string().trim().min(3, "Enter your street address").max(200),
-  postcode: z.string().trim().min(3, "Enter your postcode").max(20),
-  city: z.string().trim().min(2, "Enter your city").max(100),
-  country: z.string().trim().min(2).max(60),
 });
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — VITADAY" },
-      { name: "description", content: "Secure checkout for your VITADAY order. Guest checkout, shipping shown upfront." },
-      { property: "og:title", content: "Checkout — VITADAY" },
-      { property: "og:description", content: "Complete your VITADAY order." },
+      { title: "Reserve your VITADAY — letter of intent" },
+      { name: "description", content: "Record a non-binding letter of intent for VITADAY. No payment is taken." },
+      { property: "og:title", content: "Reserve your VITADAY" },
+      { property: "og:description", content: "A non-binding letter of intent. No payment is taken." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: Checkout,
+  component: Reserve,
 });
 
-function Checkout() {
+function Reserve() {
   const { lines, totals, clear } = useCart();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [form, setForm] = useState({ email: "", name: "", address: "", postcode: "", city: "", country: "Portugal", password: "" });
+  const [form, setForm] = useState({ email: "", name: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [payment, setPayment] = useState<(typeof PAYMENT_METHODS)[number]>("Card");
+  const [agreed, setAgreed] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const set = (k: keyof typeof form) => (e: ChangeEvent<HTMLInputElement>) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
@@ -52,25 +50,39 @@ function Checkout() {
     const res = detailsSchema.safeParse(form);
     const errs: Record<string, string> = {};
     if (!res.success) for (const issue of res.error.issues) errs[String(issue.path[0])] = issue.message;
-    if (totals.hasSubscription && form.password.length < 8) errs["password"] = "Use at least 8 characters";
     setErrors(errs);
     if (Object.keys(errs).length === 0) setStep(2);
   };
 
-  const placeOrder = () => {
-    const order = { number: `VD-${Math.floor(100000 + Math.random() * 900000)}`, subscription: totals.hasSubscription, email: form.email };
-    window.sessionStorage.setItem("vitaday-last-order", JSON.stringify(order));
-    clear();
-    navigate({ to: "/order-confirmation" });
+  const signLetter = async () => {
+    setSaving(true);
+    setSaveError(null);
+    try {
+      await recordLetterOfIntent(form.email);
+      const record = {
+        number: `VD-LOI-${Math.floor(100000 + Math.random() * 900000)}`,
+        subscription: totals.hasSubscription,
+        email: form.email,
+        name: form.name,
+        amountCents: totals.totalCents,
+      };
+      window.sessionStorage.setItem("vitaday-last-intent", JSON.stringify(record));
+      clear();
+      navigate({ to: "/order-confirmation" });
+    } catch {
+      setSaveError("We couldn't save your letter of intent. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (lines.length === 0) {
     return (
       <section className="section-y">
         <div className="container-page max-w-lg text-center">
-          <h1 className="text-5xl">Your cart is empty</h1>
+          <h1 className="text-5xl">You haven&rsquo;t reserved anything yet</h1>
           <p className="mt-4 text-muted-foreground">Start with the Essential Starter Kit.</p>
-          <Button asChild size="lg" className="mt-8"><Link to="/shop/essential-starter-kit">Get the Starter Kit</Link></Button>
+          <Button asChild size="lg" className="mt-8"><Link to="/shop/essential-starter-kit">Reserve the Starter Kit</Link></Button>
         </div>
       </section>
     );
@@ -80,95 +92,110 @@ function Checkout() {
     <section className="py-10 md:py-16">
       <div className="container-page grid gap-10 md:grid-cols-[1.3fr_1fr]">
         <div>
-          <h1 className="text-5xl">Checkout</h1>
+          <h1 className="text-5xl">Reserve your VITADAY</h1>
+          <p className="mt-3 max-w-xl text-muted-foreground">
+            VITADAY is a student project at Cat&oacute;lica Lisbon and is not on sale yet. This records a
+            non-binding letter of intent. No payment is taken and nothing ships.
+          </p>
           <div className="mt-6"><RingProgress steps={STEPS} current={step} /></div>
 
           {step === 0 && (
             <div className="mt-10">
-              <h2 className="text-3xl">Review your cart</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Checking out as a guest. {totals.hasSubscription ? "Your subscription needs a password so you can manage it." : "No account needed."}</p>
-              <Button size="lg" className="mt-8" onClick={() => setStep(1)}>Continue to details</Button>
+              <h2 className="text-3xl">What you&rsquo;re reserving</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                The prices shown are the intended launch prices. They are indicative and may change before launch.
+              </p>
+              <Button size="lg" className="mt-8" onClick={() => setStep(1)}>Continue</Button>
             </div>
           )}
 
           {step === 1 && (
             <form onSubmit={submitDetails} className="mt-10 grid gap-4" noValidate>
               <h2 className="text-3xl">Your details</h2>
-              <Field id="email" label="Email" type="email" autoComplete="email" value={form.email} onChange={set("email")} error={errors["email"]} />
+              <p className="-mt-2 text-sm text-muted-foreground">
+                We only ask for a name and an email. We don&rsquo;t need an address, because nothing is being shipped.
+              </p>
               <Field id="name" label="Full name" autoComplete="name" value={form.name} onChange={set("name")} error={errors["name"]} />
-              <Field id="address" label="Street address" autoComplete="street-address" value={form.address} onChange={set("address")} error={errors["address"]} />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <Field id="postcode" label="Postcode" autoComplete="postal-code" value={form.postcode} onChange={set("postcode")} error={errors["postcode"]} />
-                <Field id="city" label="City" autoComplete="address-level2" value={form.city} onChange={set("city")} error={errors["city"]} />
-              </div>
-              <Field id="country" label="Country" autoComplete="country-name" value={form.country} onChange={set("country")} error={errors["country"]} />
-              {totals.hasSubscription && (
-                <div className="rounded-2xl bg-surface p-4">
-                  <Field id="password" label="Create a password to manage your subscription" type="password" autoComplete="new-password" value={form.password} onChange={set("password")} error={errors["password"]} />
-                  <p className="mt-2 text-xs text-muted-foreground">We only create an account for subscriptions.</p>
-                </div>
-              )}
+              <Field id="email" label="Email" type="email" autoComplete="email" value={form.email} onChange={set("email")} error={errors["email"]} />
               <div className="flex gap-3 pt-2">
                 <Button type="button" variant="outline" onClick={() => setStep(0)}>Back</Button>
-                <Button type="submit" size="lg" className="flex-1">Continue to payment</Button>
+                <Button type="submit" size="lg" className="flex-1">Continue</Button>
               </div>
             </form>
           )}
 
           {step === 2 && (
             <div className="mt-10">
-              <h2 className="text-3xl">Payment</h2>
-              <div role="radiogroup" aria-label="Payment method" className="mt-6 grid gap-3">
-                {PAYMENT_METHODS.map((m) => (
-                  <button key={m} role="radio" aria-checked={payment === m} onClick={() => setPayment(m)}
-                    className={cn("flex min-h-14 items-center gap-3 rounded-2xl border px-4 text-left", payment === m ? "border-gold bg-card shadow-soft" : "border-border hover:border-foreground/30")}>
-                    <span className={cn("grid h-5 w-5 place-items-center rounded-full border", payment === m ? "border-gold-ink bg-gold-ink" : "border-foreground/30")}>
-                      {payment === m && <span className="h-2 w-2 rounded-full bg-card" />}
-                    </span>
-                    <span className="text-sm">{m}</span>
-                  </button>
-                ))}
+              <h2 className="text-3xl">Letter of intent</h2>
+              <div className="mt-6 rounded-2xl border border-border bg-card p-6 text-sm leading-relaxed">
+                <p>
+                  I, <span className="font-medium">{form.name || "—"}</span>, confirm that I intend to purchase the
+                  following from VITADAY when it becomes available, at the indicated launch price of{" "}
+                  <span className="font-medium">{formatPrice(totals.totalCents)}</span>:
+                </p>
+                <ul className="mt-3 list-disc pl-5">
+                  {lines.map((line) => {
+                    const p = PRODUCTS[line.id];
+                    return <li key={line.id}>{p?.name ?? line.id} &times; {line.qty}</li>;
+                  })}
+                </ul>
+                <p className="mt-4 text-muted-foreground">
+                  This letter of intent records my interest only. It is <span className="font-medium">not an order and not a contract</span>.
+                  Neither I nor VITADAY is under any obligation to buy or to supply, no payment is taken now, and the price
+                  and launch date may change. I can withdraw this letter of intent at any time by replying to the email
+                  VITADAY sends me.
+                </p>
               </div>
-              <p className="mt-4 rounded-xl bg-surface p-3 text-xs text-muted-foreground">Demo checkout — no payment is taken yet. Payments will be connected before launch.</p>
+
+              <label className="mt-6 flex cursor-pointer items-start gap-3 text-sm">
+                <input type="checkbox" className="mt-1 h-4 w-4 accent-[var(--col-gold-ink,#8a6d2f)]"
+                  checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
+                <span>I have read the letter of intent above and confirm it reflects my intention.</span>
+              </label>
+
+              {saveError && <p className="mt-4 text-sm text-destructive">{saveError}</p>}
+
               <div className="mt-6 flex gap-3">
                 <Button variant="outline" onClick={() => setStep(1)}>Back</Button>
-                <Button size="lg" className="flex-1" onClick={placeOrder}><Lock className="h-4 w-4" aria-hidden="true" />Place order · {formatPrice(totals.totalCents)}</Button>
+                <Button size="lg" className="flex-1" disabled={!agreed || saving} onClick={signLetter}>
+                  <FileSignature className="h-4 w-4" aria-hidden="true" />
+                  {saving ? "Saving…" : "Record my letter of intent"}
+                </Button>
               </div>
             </div>
           )}
         </div>
 
-        <aside className="self-start rounded-3xl bg-card p-6 shadow-soft md:sticky md:top-24">
-          <h2 className="font-display text-2xl">Order summary</h2>
+        <aside className="self-start rounded-3xl bg-card p-6 shadow-soft">
+          <h2 className="font-display text-2xl">Summary</h2>
           <ul className="mt-4 space-y-3 text-sm">
-            {lines.map((l) => {
-              const p = PRODUCTS[l.id];
+            {lines.map((line) => {
+              const p = PRODUCTS[line.id];
               return (
-                <li key={l.id} className="flex justify-between gap-4">
-                  <span>{l.qty} × {p.name}</span>
-                  <span className="shrink-0">{formatPrice(p.priceCents * l.qty)}{p.recurring && "/mo"}</span>
+                <li key={line.id} className="flex justify-between gap-4">
+                  <span>{p?.name ?? line.id} &times; {line.qty}</span>
+                  <span>{formatPrice((p?.priceCents ?? 0) * line.qty)}</span>
                 </li>
               );
             })}
           </ul>
-          <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm">
-            <div className="flex justify-between"><span>Subtotal</span><span>{formatPrice(totals.subtotalCents)}</span></div>
-            <div className="flex justify-between"><span>Shipping</span><span>{formatPrice(totals.shippingCents)}</span></div>
-            <div className="flex justify-between text-base font-medium"><span>Total today</span><span>{formatPrice(totals.totalCents)}</span></div>
-            {totals.hasSubscription && <p className="text-xs text-muted-foreground">Then {formatPrice(totals.recurringCents)}/month. Pause, skip or cancel anytime in 2 clicks.</p>}
+          <div className="mt-4 flex justify-between border-t border-border pt-4 text-sm font-medium">
+            <span>Indicative total</span><span>{formatPrice(totals.totalCents)}</span>
           </div>
+          <p className="mt-3 text-xs text-muted-foreground">Indicative launch price. No payment is taken.</p>
         </aside>
       </div>
     </section>
   );
 }
 
-function Field({ id, label, error, ...props }: { id: string; label: string; error?: string | undefined } & InputHTMLAttributes<HTMLInputElement>) {
+function Field({ id, label, error, ...rest }: { id: string; label: string; error?: string | undefined } & InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <div className="space-y-1.5">
+    <div>
       <Label htmlFor={id}>{label}</Label>
-      <Input id={id} name={id} aria-invalid={!!error} aria-describedby={error ? `${id}-err` : undefined} className="h-11 rounded-xl bg-card" {...props} />
-      {error && <p id={`${id}-err`} className="text-xs text-destructive">{error}</p>}
+      <Input id={id} className={cn("mt-1", error && "border-destructive")} aria-invalid={!!error}
+        aria-describedby={error ? `${id}-error` : undefined} {...rest} />
+      {error && <p id={`${id}-error`} className="mt-1 text-xs text-destructive">{error}</p>}
     </div>
   );
 }

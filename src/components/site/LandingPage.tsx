@@ -6,7 +6,7 @@ import { PRODUCTS, formatPrice } from "@/lib/catalog";
 
 /** Ad landing page: hero, 3 steps, Starter Kit offer, FAQ — one CTA throughout. */
 export function LandingPage({ eyebrow, headline, sub, image }: { eyebrow: string; headline: string; sub: string; image: { src: string; alt: string } }) {
-  const cta = `Get the Starter Kit – ${formatPrice(PRODUCTS["starter-kit"].priceCents)}`;
+  const cta = `Reserve the Starter Kit – ${formatPrice(PRODUCTS["starter-kit"].priceCents)}`;
   return (
     <>
       <section className="daylight">
