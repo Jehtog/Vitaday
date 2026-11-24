@@ -4,7 +4,6 @@ export type ProductId =
   | "starter-kit"
   | "bottle"
   | "refill-7"
-  | "refill-28"
   | "subscription-28";
 
 export interface Product {
@@ -37,19 +36,13 @@ export const PRODUCTS: Record<ProductId, Product> = {
     short: "1 Weekly Refill Ring",
     priceCents: 599,
   },
-  "refill-28": {
-    id: "refill-28",
-    name: "Essential 28-day refill",
-    short: "4 Weekly Refill Rings",
-    priceCents: 1999,
-  },
   "subscription-28": {
     id: "subscription-28",
     name: "Essential monthly subscription",
     short: "28 portions, delivered monthly",
     priceCents: 1799,
     recurring: "month",
-    badge: "Save 10%",
+    badge: "Save 25%",
     note: "Pause, skip or cancel anytime in 2 clicks",
   },
 };
@@ -58,7 +51,6 @@ export const PURCHASE_OPTIONS: ProductId[] = [
   "starter-kit",
   "bottle",
   "refill-7",
-  "refill-28",
   "subscription-28",
 ];
 
@@ -76,8 +68,7 @@ export type CollectionId =
   | "balance"
   | "active"
   | "focus"
-  | "cycle"
-  | "junior";
+  | "cycle";
 
 export interface Collection {
   id: CollectionId;
@@ -98,7 +89,6 @@ export const COLLECTIONS: Collection[] = [
   { id: "active", name: "Active", tagline: "Sports & Hydration", description: "An electrolyte refill for active days, in development.", available: false, colorClass: "bg-active" },
   { id: "focus", name: "Focus", tagline: "Student Wellness", description: "A routine for academic life, in development.", available: false, colorClass: "bg-focus" },
   { id: "cycle", name: "Cycle", tagline: "Menstrual Wellness", description: "A convenient routine around your cycle, in development.", available: false, colorClass: "bg-cycle" },
-  { id: "junior", name: "Junior", tagline: "Kids' Wellness", description: "Developed with paediatric nutrition experts before launch.", available: false, colorClass: "bg-junior" },
 ];
 
 export const WEEKDAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as const;

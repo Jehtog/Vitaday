@@ -61,7 +61,6 @@
   --color-active: var(--col-active);
   --color-focus: var(--col-focus);
   --color-cycle: var(--col-cycle);
-  --color-junior: var(--col-junior);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -126,7 +125,6 @@
   --col-active: oklch(0.914 0.018 245.4);
   --col-focus: oklch(0.907 0.024 299.3);
   --col-cycle: oklch(0.897 0.031 5.1);
-  --col-junior: oklch(0.931 0.043 86.6);
 
   --chart-1: oklch(0.704 0.074 80.2);
   --chart-2: oklch(0.6 0.05 60);

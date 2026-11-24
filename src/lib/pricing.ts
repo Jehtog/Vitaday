@@ -37,20 +37,18 @@ export function computeTotals(lines: CartLine[]): CartTotals {
   };
 }
 
-/** Percentage saved by the monthly subscription versus buying the 28-day refill once. */
+/** Percentage saved by the monthly subscription versus buying four 7-day refills. */
 export function subscriptionSavingPercent(): number {
-  const oneTime = PRODUCTS["refill-28"].priceCents;
+  const oneTime = PRODUCTS["refill-7"].priceCents * 4;
   const sub = PRODUCTS["subscription-28"].priceCents;
   return Math.round(((oneTime - sub) / oneTime) * 100);
 }
 
 /**
- * Switch one-time 28-day refills to the monthly subscription.
- * If the cart has no 28-day refill, a single subscription is added.
+ * Switch one-time refills to the monthly subscription. Four 7-day rings make up
+ * one month, so any number of them becomes a single monthly subscription.
  */
 export function switchToSubscription(lines: CartLine[]): CartLine[] {
-  const refill = lines.find((l) => l.id === "refill-28");
-  const qty = refill ? refill.qty : 1;
-  const rest = lines.filter((l) => l.id !== "refill-28" && l.id !== "subscription-28");
-  return [...rest, { id: "subscription-28", qty }];
+  const rest = lines.filter((l) => l.id !== "refill-7" && l.id !== "subscription-28");
+  return [...rest, { id: "subscription-28", qty: 1 }];
 }

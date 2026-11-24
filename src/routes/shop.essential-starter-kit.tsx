@@ -134,12 +134,13 @@ function ProductPage() {
               <button className="grid h-12 w-12 place-items-center" onClick={() => setQty((q) => q + 1)} aria-label="Increase quantity"><Plus className="h-4 w-4" /></button>
             </div>
             <Button size="lg" className="flex-1" onClick={() => add(option, qty)}>
-              Add to cart · {formatPrice(product.priceCents * qty)}{product.recurring ? "/mo" : ""}
+              Reserve · {formatPrice(product.priceCents * qty)}{product.recurring ? "/mo" : ""}
             </Button>
           </div>
           <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
             <Truck className="h-4 w-4 text-gold-ink" aria-hidden="true" />
-            Estimated delivery: {window_ ? `${fmtDay(window_[0])} – ${fmtDay(window_[1])}` : "3–5 business days"}
+            Not shipping yet. Reserving records a non-binding letter of intent and takes no payment.
+            {window_ ? ` At launch we would aim to deliver in about ${fmtDay(window_[0])} – ${fmtDay(window_[1])}.` : ""}
           </p>
 
           <div className="mt-8 rounded-2xl bg-surface p-5">

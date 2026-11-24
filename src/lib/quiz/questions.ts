@@ -2,7 +2,7 @@
 // Change a number, add an answer or re-word a question without touching any component.
 import type { PresetId } from "./presets";
 
-export type QuestionId = "q1" | "q2" | "q3" | "q4" | "q5" | "q6" | "q7";
+export type QuestionId = "q2" | "q3" | "q4" | "q5" | "q6" | "q7";
 export type OptionId = string;
 
 /** answers[question id] = the chosen answer's option id. */
@@ -28,14 +28,6 @@ export interface QuizQuestion {
 }
 
 export const QUESTIONS: QuizQuestion[] = [
-  {
-    id: "q1",
-    prompt: "Who is VITADAY for?",
-    options: [
-      { id: "me", label: "For me", next: "q2" },
-      { id: "child", label: "For my child", next: "result", resultPreset: "junior" },
-    ],
-  },
   {
     id: "q2",
     prompt: "What do you want to support most?",
@@ -92,7 +84,6 @@ export const QUESTIONS: QuizQuestion[] = [
   {
     id: "q7",
     prompt: "Would you like support around your cycle?",
-    showIf: (answers) => answers["q1"] === "me",
     options: [
       { id: "yes", label: "Yes", points: { cycle: 3 }, next: "result" },
       { id: "no", label: "No", next: "result" },

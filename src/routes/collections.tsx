@@ -7,7 +7,7 @@ export const Route = createFileRoute("/collections")({
   head: () => ({
     meta: [
       { title: "VITADAY Collections — Essential, Glow, Balance, Active & more" },
-      { name: "description", content: "Essential is available now. Join the waitlist for Glow, Balance, Active, Focus, Cycle and Junior — all fit the same bottle." },
+      { name: "description", content: "Essential is available now. Join the waitlist for Glow, Balance, Active, Focus and Cycle — all fit the same bottle." },
       { property: "og:title", content: "VITADAY Collections" },
       { property: "og:description", content: "Seven refill collections, one bottle. Vote for what comes next." },
       { property: "og:type", content: "website" },

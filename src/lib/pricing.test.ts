@@ -9,16 +9,15 @@ describe("VITADAY prices", () => {
   it("Bottle only costs €29.99", () => {
     expect(PRODUCTS.bottle.priceCents).toBe(2999);
   });
-  it("7-day refill costs €5.99 and 28-day refill €19.99", () => {
+  it("7-day refill costs €5.99", () => {
     expect(PRODUCTS["refill-7"].priceCents).toBe(599);
-    expect(PRODUCTS["refill-28"].priceCents).toBe(1999);
   });
   it("monthly subscription costs €17.99 per month", () => {
     expect(PRODUCTS["subscription-28"].priceCents).toBe(1799);
     expect(PRODUCTS["subscription-28"].recurring).toBe("month");
   });
-  it("subscription saves 10% versus the 28-day refill", () => {
-    expect(subscriptionSavingPercent()).toBe(10);
+  it("subscription saves 25% versus buying four 7-day refills", () => {
+    expect(subscriptionSavingPercent()).toBe(25);
   });
 });
 
@@ -39,14 +38,14 @@ describe("cart totals", () => {
     expect(t.recurringCents).toBe(1799);
     expect(t.hasSubscription).toBe(true);
   });
-  it("switching to subscription replaces 28-day refills", () => {
+  it("switching to subscription replaces one-time refills", () => {
     const next = switchToSubscription([
       { id: "starter-kit", qty: 1 },
-      { id: "refill-28", qty: 2 },
+      { id: "refill-7", qty: 2 },
     ]);
     expect(next).toEqual([
       { id: "starter-kit", qty: 1 },
-      { id: "subscription-28", qty: 2 },
+      { id: "subscription-28", qty: 1 },
     ]);
   });
 });

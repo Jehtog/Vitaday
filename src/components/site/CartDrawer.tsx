@@ -18,7 +18,7 @@ export function CartDrawer() {
       <SheetContent side="right" className="flex w-full flex-col gap-0 border-border bg-background p-0 sm:max-w-md">
         <SheetHeader className="border-b border-border p-5 text-left">
           <SheetTitle className="font-display text-3xl font-normal">{t.cart.title}</SheetTitle>
-          <SheetDescription className="text-xs">Shipping {formatPrice(totals.shippingCents || 490)} — shown before checkout, always.</SheetDescription>
+          <SheetDescription className="text-xs">Indicative prices. No payment is taken and nothing ships yet.</SheetDescription>
         </SheetHeader>
 
         <div className="flex-1 overflow-y-auto p-5">
@@ -26,7 +26,7 @@ export function CartDrawer() {
             <div className="py-16 text-center">
               <p className="text-muted-foreground">{t.cart.empty}</p>
               <Button asChild className="mt-6" onClick={() => setOpen(false)}>
-                <Link to="/shop/essential-starter-kit">Get the Starter Kit</Link>
+                <Link to="/shop/essential-starter-kit">Reserve the Starter Kit</Link>
               </Button>
             </div>
           ) : (

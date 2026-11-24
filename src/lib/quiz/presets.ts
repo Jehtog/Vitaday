@@ -29,7 +29,7 @@ export const INGREDIENTS_PLACEHOLDER = "Ingredients coming soon";
  * Added to every shop link coming out of the quiz, so quiz traffic can be told apart later.
  *
  * Intended per-collection shop pages (swap shopUrl above once they exist):
- *   /shop/essential, /shop/glow, /shop/balance, /shop/active, /shop/focus, /shop/cycle, /shop/junior
+ *   /shop/essential, /shop/glow, /shop/balance, /shop/active, /shop/focus, /shop/cycle
  * Today only Essential is purchasable, so it points at the Starter Kit page and the
  * other six point at /collections, where their waitlists live.
  */
@@ -40,7 +40,7 @@ export const QUIZ_UTM: Record<string, string> = {
 };
 
 /** Order used for display and for tie-breaking in the scorer. */
-export const PRESET_ORDER: PresetId[] = ["essential", "glow", "balance", "active", "focus", "cycle", "junior"];
+export const PRESET_ORDER: PresetId[] = ["essential", "glow", "balance", "active", "focus", "cycle"];
 
 export const PRESETS: Record<PresetId, QuizPreset> = {
   essential: {
@@ -101,16 +101,6 @@ export const PRESETS: Record<PresetId, QuizPreset> = {
     image: collectionBox.cycle,
     imageAlt: "VITADAY Cycle 7-day refill box",
     colorClass: "bg-cycle",
-    shopUrl: "/collections",
-  },
-  junior: {
-    id: "junior",
-    name: "Junior",
-    blurb: "A routine for children, developed with paediatric nutrition experts before launch.",
-    ingredients: list("junior"),
-    image: collectionBox.junior,
-    imageAlt: "VITADAY Junior 7-day refill box",
-    colorClass: "bg-junior",
     shopUrl: "/collections",
   },
 };

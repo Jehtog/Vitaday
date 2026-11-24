@@ -41,3 +41,16 @@ export async function fetchVoteCounts(): Promise<Record<string, number>> {
   for (const row of data) out[row.collection] = Number(row.votes);
   return out;
 }
+
+/**
+ * Records a non-binding letter of intent. VITADAY is not on sale, so nothing is charged
+ * and no order is created; this only stores the email so the team can follow up at launch.
+ */
+export async function recordLetterOfIntent(email: string) {
+  const parsed = emailSchema.parse(email);
+  const { error } = await supabase.from("newsletter_signups").insert({
+    email: parsed.toLowerCase(),
+    source: "letter-of-intent",
+  });
+  if (error) throw new Error("Something went wrong. Please try again.");
+}

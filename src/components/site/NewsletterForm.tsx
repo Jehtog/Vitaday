@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { joinNewsletter } from "@/lib/signups";
@@ -7,11 +8,16 @@ import { cn } from "@/lib/utils";
 export function NewsletterForm({ source, className }: { source: string; className?: string }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "saving" | "done">("idle");
+  const [consent, setConsent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
+    if (!consent) {
+      setError("Please tick the box so we know you agree.");
+      return;
+    }
     setStatus("saving");
     try {
       await joinNewsletter(email, source);
@@ -35,7 +41,13 @@ export function NewsletterForm({ source, className }: { source: string; classNam
         <Button type="submit" disabled={status === "saving"}>{status === "saving" ? "Signing up…" : "Sign up"}</Button>
       </div>
       {error && <p className="mt-2 text-sm text-destructive" role="alert">{error}</p>}
-      <p className="mt-3 text-xs text-muted-foreground">By signing up you agree to receive emails from VITADAY. Unsubscribe anytime. See our Privacy policy.</p>
+      <label className="mt-3 flex cursor-pointer items-start gap-2 text-xs text-muted-foreground">
+        <input type="checkbox" className="mt-0.5 h-3.5 w-3.5 shrink-0" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+        <span>
+          I agree that VITADAY may email me news and launch updates. You can withdraw at any time, see{" "}
+          <Link to="/privacy" className="underline underline-offset-2">how to unsubscribe</Link> in our privacy policy.
+        </span>
+      </label>
     </form>
   );
 }
