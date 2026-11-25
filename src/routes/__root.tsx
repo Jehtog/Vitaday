@@ -92,10 +92,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VITADAY — Your daily vitamins, made simple" },
+      { title: "VITADAY — Keeps the doctor away" },
       { name: "description", content: "A reusable glass bottle with a 7-day vitamin dispenser built into the cap." },
       { name: "author", content: "VITADAY" },
-      { property: "og:title", content: "VITADAY — Your daily vitamins, made simple" },
+      { property: "og:title", content: "VITADAY — Keeps the doctor away" },
       { property: "og:description", content: "A reusable glass bottle with a 7-day vitamin dispenser built into the cap." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
