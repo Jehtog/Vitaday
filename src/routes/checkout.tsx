@@ -58,9 +58,19 @@ function Reserve() {
     setSaving(true);
     setSaveError(null);
     try {
-      await recordLetterOfIntent(form.email);
+      const reference = `VD-LOI-${Math.floor(100000 + Math.random() * 900000)}`;
+      // A readable snapshot of what was reserved, so the row still makes sense if the catalog changes.
+      const items = lines.map((line) => ({ product: PRODUCTS[line.id].name, qty: line.qty }));
+      await recordLetterOfIntent({
+        email: form.email,
+        name: form.name,
+        items,
+        subscription: totals.hasSubscription,
+        amountCents: totals.totalCents,
+        reference,
+      });
       const record = {
-        number: `VD-LOI-${Math.floor(100000 + Math.random() * 900000)}`,
+        number: reference,
         subscription: totals.hasSubscription,
         email: form.email,
         name: form.name,

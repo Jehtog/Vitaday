@@ -42,15 +42,38 @@ export async function fetchVoteCounts(): Promise<Record<string, number>> {
   return out;
 }
 
+/** One reserved line on a letter of intent, kept as a readable snapshot. */
+export interface LetterOfIntentLine {
+  product: string;
+  qty: number;
+  [key: string]: string | number;
+}
+
+export interface LetterOfIntentInput {
+  email: string;
+  name: string;
+  items: LetterOfIntentLine[];
+  subscription: boolean;
+  amountCents: number;
+  reference: string;
+}
+
 /**
  * Records a non-binding letter of intent. VITADAY is not on sale, so nothing is charged
- * and no order is created; this only stores the email so the team can follow up at launch.
+ * and no order is created; this stores who signed and what they reserved so the team can
+ * follow up at launch. The row is insert-only: the public key cannot read it back.
  */
-export async function recordLetterOfIntent(email: string) {
-  const parsed = emailSchema.parse(email);
-  const { error } = await supabase.from("newsletter_signups").insert({
-    email: parsed.toLowerCase(),
-    source: "letter-of-intent",
+export async function recordLetterOfIntent(input: LetterOfIntentInput) {
+  const email = emailSchema.parse(input.email);
+  const name = input.name.trim().slice(0, 120);
+  if (!name) throw new Error("Please enter your name.");
+  const { error } = await supabase.from("letters_of_intent").insert({
+    email: email.toLowerCase(),
+    name,
+    items: input.items,
+    subscription: input.subscription,
+    amount_cents: Math.max(0, Math.round(input.amountCents)),
+    reference: input.reference.slice(0, 40),
   });
   if (error) throw new Error("Something went wrong. Please try again.");
 }
