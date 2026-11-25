@@ -59,6 +59,39 @@ export type Database = {
         }
         Relationships: []
       }
+      letters_of_intent: {
+        Row: {
+          amount_cents: number
+          created_at: string
+          email: string
+          id: string
+          items: Json
+          name: string
+          reference: string | null
+          subscription: boolean
+        }
+        Insert: {
+          amount_cents?: number
+          created_at?: string
+          email: string
+          id?: string
+          items?: Json
+          name: string
+          reference?: string | null
+          subscription?: boolean
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string
+          email?: string
+          id?: string
+          items?: Json
+          name?: string
+          reference?: string | null
+          subscription?: boolean
+        }
+        Relationships: []
+      }
       newsletter_signups: {
         Row: {
           created_at: string

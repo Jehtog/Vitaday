@@ -13,9 +13,9 @@ import { t } from "@/i18n/en";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VITADAY — Your daily vitamins, made simple" },
+      { title: "VITADAY — Keeps the doctor away" },
       { name: "description", content: "Seven days of vitamins, built into the bottle you already carry. Get the VITADAY Essential Starter Kit for €34.99." },
-      { property: "og:title", content: "VITADAY — Your daily vitamins, made simple" },
+      { property: "og:title", content: "VITADAY — Keeps the doctor away" },
       { property: "og:description", content: "Seven days of vitamins, built into the bottle you already carry." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -34,7 +34,7 @@ function Home() {
           <div className="reveal">
             <p className="eyebrow">7-day vitamin water bottle</p>
             <h1 className="mt-4 text-5xl leading-[1.02] text-foreground sm:text-6xl lg:text-7xl">
-              Your daily vitamins, <em className="text-gold-ink">made simple.</em>
+              VITADAY keeps the <em className="text-gold-ink">doctor away.</em>
             </h1>
             <p className="mt-6 max-w-md text-lg text-muted-foreground">Seven days of vitamins, built into the bottle you already carry.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">

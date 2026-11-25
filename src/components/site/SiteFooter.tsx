@@ -12,7 +12,7 @@ export function SiteFooter() {
       <div className="container-page grid gap-12 py-16 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
           <Wordmark />
-          <p className="mt-4 max-w-sm text-sm text-muted-foreground">Your daily vitamins, made simple. Seven days, one bottle.</p>
+          <p className="mt-4 max-w-sm text-sm text-muted-foreground">VITADAY keeps the doctor away. Seven days, one bottle.</p>
           <div className="mt-8">
             <p className="font-display text-2xl">{t.footer.newsletterTitle}</p>
             <p className="mt-1 text-sm text-muted-foreground">{t.footer.newsletterText}</p>
